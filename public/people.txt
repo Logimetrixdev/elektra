@@ -1,0 +1,1 @@
+@@@@@@@@@@@@@@{"controller":"api","action":"get-job-details","module":"default","LoginID":"547888","job_id":"ACME\/17\/12\/2013\/0203","device_id":"357541050652827","appkey":"mys3cr3tk3y"}================

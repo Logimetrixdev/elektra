@@ -1,0 +1,138 @@
+<?php 
+$record = $this->paginator; 
+$totalrec = $this->totalrec;
+$get = $this->get;
+$params = $this->params;
+
+// Start reset url code
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+//echo "<pre>"; print_r($authStorage->read()); die;
+$role = $authStorage->read()->Role;
+
+
+?>
+
+<script type="text/javascript">
+function goback() {
+    history.go(-1);
+}
+</script>
+
+
+
+
+<!-- Search ajax end here -->
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Manage Chemical </h1>
+        </div>
+        <div class="breadcrumb">
+        <div style="position:relative;">
+        <ul class="imop">
+          <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li >Chemical Masters<span class="divider">/</span></li>
+                        <li class="active">Manage Chemical<span class="divider">/</span></li>
+        </ul>
+             
+          
+        </div>
+        <a href="javascript:void(0);" style="position:absolute; right:10px; top:5px; border: 1px solid; background-color: #4d5b76; color: #fff; padding:1px 6px; font-size:12px; font-weight:bold; display:block;" id="showuserlocation" class="iframe" onClick="goback();">Back</a>
+        </div>
+<script>
+$(document).ready(function() {
+    $('.breadcrumb').css({'width':(($(window).width())-270)+'px'});
+	$(window).resize(function(){
+       $('.breadcrumb').css({'width':(($(window).width())-270)+'px'}); 
+    });
+});
+</script>
+<style>
+.tableheading{
+	background-color: #e2e2e2;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #cfcccc;
+}
+.txt_center{
+	text-align:center !important;
+}
+.imop{
+margin:0px !important;
+}
+</style>
+        <div class="container-fluid" style="padding-top:162px;">
+
+<!--- user filtor by role end --->
+
+ <div class="row-fluid" style="margin-top:10px;">
+
+ <?php if($params['type']=='success') { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				Chemical Details Updated Successfully...
+		</div>	
+		<?php } ?>
+ <?php if($this->successMessage) { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<?php echo $this->successMessage;?>
+		</div>	
+		<?php } ?>
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+     
+<div class="well" style="overflow:scroll; height:auto;">
+    <a href="/chemical/add-chemical" class="btn btn-primary" style="float:right; margin-bottom: 15px;">Add New Chemical Type</a> 
+    <table class="table tablesorter">
+      <thead>
+
+	  <tr><td colspan="13" class="tableheading">Manage Chemical Type</td></tr>
+        <tr>
+
+<th>S.No</th>
+<th>Chemical type</th>
+<th>Chemical Name</th>
+<th>Action </th>
+ </tr>
+      </thead>
+      <tbody>
+       <?php
+	   	
+	if($totalrec)
+	{
+          $i=1;
+	  foreach($record as $key=>$val)
+	  {
+	?>
+        <tr>
+			<td><?php echo $i; ?></td>
+          <td><?php echo $val['chemical_type'];?></td>
+          <td><?php echo $val['created'];?></td>
+           <td><a href="/chemical/edit-chemical/code/<?php echo md5($val['id']);?>" title="Edit Chemical">Edit</a></td>
+        </tr>
+
+          <?php $i++; } } else { ?>   
+	   <tr><td colspan="8">Result not found.</td></tr>
+	   <?php } ?>
+
+      </tbody>
+    </table>
+</div>
+
+<!--Pagingnation Start-->
+<?php if($totalrec > $this->perPage) { echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); } ?>
+	</div>
+</div>
+</div>
+    
+   

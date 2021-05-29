@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+<script src="/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+ <!-- fancybox start here -->
+<script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+ <script type="text/javascript">
+$(function(){
+	$('#legend-help').click( function() {
+			//var sData = $('#user-track-form').serialize(); 
+				//var data = $.trim(sData);
+				$.fancybox({ 
+							'padding'          : 10, 
+							'autoScale'        : false, 
+							'transitionIn'     : 'fade', 
+							'transitionOut'    : 'fade', 
+							'title'            : this.title, 
+ 
+							'href'             : '/gmap/legend-help', 
+							'type'             : 'iframe' 
+						}); 
+				return false; 
+			
+	}); 
+$( "#circle" ).change(function(e) {
+
+// alert($( "#circle" ).val());    
+$.get( "/reports/get-cluster-by-circle", { circle_id: $( "#circle" ).val() }, "json" )
+.done(function( data ) {
+//alert( "Data Loaded: " + data );
+  select = document.getElementById('cluster');
+    select.options.length = 0;
+    options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) {
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }
+	
+});
+
+});
+
+$( "#circle" ).change(function(e) {
+
+ 
+$.get( "/reports/get-engglist-by-circle", { circle_id: $( "#circle" ).val() }, "json" )
+.done(function( data ) {
+//alert( "Data Loaded: " + data );
+  select = document.getElementById('field_user');
+
+    // Clear the old options
+    select.options.length = 0;
+
+    // Load the new options
+    options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) { 
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }
+	
+});
+
+});
+
+
+
+
+$( "#cluster" ).change(function(e) {
+
+var circle = $( "#circle" ).val();   
+var cluster = $( "#cluster" ).val();
+//alert(circle);
+//alert(cluster);
+if(circle!="" && cluster=="-"){
+
+$.get( "/reports/get-engglist-by-circle", { circle_id: $( "#circle" ).val() }, "json" )
+.done(function( data ) {
+//alert( "Data Loaded: " + data );
+  select = document.getElementById('field_user');
+
+    // Clear the old options
+    select.options.length = 0;
+
+    // Load the new options
+    options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) { 
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }
+	
+});
+
+  
+  
+}else{
+  
+$.get( "/gmap/get-user-by-cluster", { cluster_id: $( "#cluster" ).val() }, "json" )
+.done(function( data ) {
+//alert( "Data Loaded: " + data );
+  select = document.getElementById('field_user');
+
+    // Clear the old options
+    select.options.length = 0;
+
+    // Load the new options
+    options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) {
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }
+	
+});
+
+}
+
+
+});
+
+$(function() {
+		$( "#user_date" ).datepicker({
+			showOn: "button",
+			buttonImage: "http://runapp.me/images/calendar.gif",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true,
+			buttonText:'Date',
+                        changeMonth: true,
+                        changeYear: true
+		});
+			
+               
+              
+});
+
+//$( "#cluster" ).change(function(e) {
+//
+//// alert($( "#circle" ).val());    
+//$.get( "/gmap/get-user-by-cluster", { cluster_id: $( "#cluster" ).val() }, "json" )
+//.done(function( data ) {
+////alert( "Data Loaded: " + data );
+//  select = document.getElementById('field_user');
+//    select.options.length = 0;
+//    options = data.options; // Or whatever source information you're working with
+//    for (index = 0; index < options.length; ++index) {
+//      option = options[index];
+//      select.options.add(new Option(option.text, option.value));
+//    }
+//	
+//});
+//
+//});	
+	}); 
+	
+	
+function validateVal()
+{
+		if(document.getElementById('user_staffcode').value=='' && document.getElementById('user_staff_code').value=='')
+		{
+			alert('Please select Login ID');	
+			document.getElementById("user_staffcode").focus();
+			return false;
+		}
+		
+}	
+	
+</script>	
+<style>
+ul.breadcrumb-top li{
+	 display:inline-block;
+	 position:relative;
+	 margin:1em 0;
+}
+ul.breadcrumb-top{
+	 float:right;
+	 width:50%;	
+	}
+</style>
+	
+
+<div class="content">
+  <div class="header">
+    <h1 class="page-title" style="float:left;width:20%">User Tracking</h1>
+    <ul class="breadcrumb-top" style="float: right; width: 38%;">
+    <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+    <li><a href="/gmap/track">Tracking</a> <span class="divider">/</span></li>
+	<li class="active">Track User</li>
+    
+  </ul>
+  <?php if($this->errorMessage!='') { ?>
+		<div class="alert alert-warning">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<?php echo $this->errorMessage;?>
+		</div>	
+		<?php } ?>
+  </div>
+
+  <ul class="breadcrumb" style="margin:0;padding:0;">
+    <li style="width:100%">
+    <div  style="margin-top:7px">
+	
+    <form id="user-track-form" method="post" action="/gmap/index" target="iframex" onsubmit="return validateVal();">
+          <fieldset>
+          
+<div class="frmRow">
+&nbsp;&nbsp; <input type="text" name="user_staffcode" class="input-small" id="user_staffcode" placeholder="Login ID">
+&nbsp;&nbsp; OR &nbsp;&nbsp; 
+<select name="user_staff_code" id="user_staff_code" style="width:145px;">
+	<option value="">Select User</option>
+<?php
+foreach($this->userdetails as $val)
+{
+		?>
+		<option value="<?php echo $val['LoginID']?>"><?php echo $val['StaffName']?>-<strong><?php echo $val['LoginID']?></strong></option>
+		<?php
+}
+?>
+</select>
+&nbsp;&nbsp; 
+<input type="text" name="user_date" class="input-small" id="user_date" placeholder="Date">&nbsp;&nbsp; 
+
+<button type="submit" class="btn btn-primary" name="submit" value="submit" style="width:10%; margin-right:15px;">Track User</button>
+
+<div class="clear"></div>
+            </div>
+
+          </fieldset>
+        </form>
+             
+                   
+    </div>
+    </li>
+    </ul>
+  <div class="container-fluid" style="padding-top:162px;">
+	
+
+    <div class="row-fluid" style="margin-top:10px;">
+     <iframe name='iframex' width="100%" height="800" frameborder="0"></iframe> 
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,179 @@
+<?php
+$record = $this->paginator; 
+$totalrec = $this->totalrec;
+$get = $this->get;
+$params = $this->params;
+if ($params['id']) {
+ $editNotification = $this->editNotification;
+}
+?>
+<script src="/js/jquery-1.8.3.js"></script>
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+
+<script>
+  function validateUser()
+  {  
+    if(document.getElementById("notification_content").value=="")
+    {
+      alert("Please enter Notification.");
+      document.getElementById("notification_content").focus();
+      return false;
+    }
+    return true;
+  }
+</script>
+
+<script type="text/javascript">
+
+  function changeStatus(id){
+
+    swal({
+      title: "Are you sure?",
+      text: "You want to delete this notification",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false
+    }, function (isConfirm) {
+      if (!isConfirm) return;
+      $.ajax({
+        url: "/notification/delete-notification/id/"+id,
+        type: "POST",
+        context: document.body,
+        success: function () {
+          swal({
+            title: "delete", 
+            text: "notification has been successfully deleted", 
+            type: "success"
+          },function() {
+            location.reload();
+          });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          swal("Error "+status+"!", "Please try again", "error");
+        }
+      });
+    });
+  };
+</script>
+
+</script>
+
+
+
+
+<div class="content">
+
+  <div class="header">
+    <?php if ($editNotification['id']) {  ?>
+    <h1 class="page-title">Edit Notification </h1>
+    <?php } else { ?>
+    <h1 class="page-title">Add New Notification </h1>
+    <?php } ?>
+  </div>
+
+  <ul class="breadcrumb">
+    <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+    <li class="active">Notification<span class="divider"></span></li>
+  </ul>
+
+  <?php if($this->successMessage) { ?>
+  <div class="alert alert-info">
+    <button data-dismiss="alert" class="close" type="button">×</button>
+    <?php echo $this->successMessage;?>
+  </div>	
+  <?php } ?>
+
+  <?php if($this->errorMessage) { ?>
+  <div class="alert alert-error">
+   <button data-dismiss="alert" class="close" type="button">×</button>
+   <?php echo $this->errorMessage;?>
+ </div>
+ <?php } ?>
+ <div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+ margin-right: 10px;
+ -webkit-border-radius: 10px!important;">
+
+
+ <form id="myform" method="post" name="fielduserform" action=""  onsubmit="return validateUser();"  >
+  <fieldset>
+    <legend>Notification Content</legend>
+    <div class="frmRow" style="float: left; width: 50%;">
+      <div class="frmColLeft" style="width:170px !important;">Content :</div>
+      <div class="frmColRight" style="margin-left: 170px!important;">
+       <div class="acme_dtdp">
+         <div>
+
+          <?php if ($editNotification['id']) { ?>
+          <input type="hidden" name="id" value="<?php echo $editNotification['id']; ?>">
+          <?php } ?>         
+
+          <textarea style="height: 9em;width: 47em;" name="notification_content" id="notification_content"><?php echo $editNotification['notification_content']?></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+</fieldset>
+
+
+<div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+ <!--  <button type="button" class="btn btn-primary" value="Cancel">Cancel</button> -->
+
+ <?php if ($editNotification['id']) {  ?>
+ <button type="submit" class="btn btn-primary" value="Save">Update</button>
+ <?php  }  else { ?>
+ <button type="submit" class="btn btn-primary" value="Save">Add Notification</button>
+ <?php }?>
+
+</div>
+</form>
+</div>
+<div class="well" style="overflow:scroll; height:auto;">
+  <table class="table tablesorter">
+    <thead>
+
+      <tr><td colspan="13" class="tableheading">Notification List</td></tr>
+      <tr>
+        <th>#</th>
+        <th>Notification Content</th>
+        <!-- <th>Action</th> -->
+      </tr>
+    </thead>
+    <tbody>
+     <?php
+
+     if($totalrec){
+      $i=1;
+      foreach($record as $key=>$val){
+
+
+       ?>
+       <tr>
+        <td><?php echo $i;?></td> 
+        <td><?php echo $val['notification_content'];?></td>
+        <td> 
+          <!-- <a href="/notification/index/id/<?php echo $val['id'];?>" title="Edit">Edit </a> -->
+          <!--  | -->
+          <!-- <a href="javascript:void(0)" onclick="changeStatus('<?php echo $val['id'];?>')" title="Delete">Delete </a> -->
+        </td>
+
+        <?php  $i++;
+      } 
+
+    }  else { ?>  
+    <tr><td colspan="8">Result not found.</td></tr>
+    <?php } ?>
+
+  </tbody>
+</table>
+</div>
+<!--Pagingnation Start-->
+<?php if($totalrec > $this->perPage) { echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); } ?>
+</div>
+
+
+

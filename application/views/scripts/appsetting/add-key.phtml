@@ -1,0 +1,146 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+$params = $this->params;
+$circleList = $this->circleList;
+if($params['key']=='lastcrop'){
+    $lable = 'Last Crop';
+    $title = 'Add New Last Crop';          
+}elseif($params['key']=='lastrabi'){
+    $lable = 'Last Rabi Crop';
+    $title = 'Add New Last Rabi Crop';
+}elseif($params['key']=='lastkharif'){
+    $lable = 'Last Kharif Crop';
+    $title = 'Add New Last Kharif Crop';
+}elseif($params['key']=='soiltype'){
+    $lable = 'Soil Type';
+    $title = 'Add New Soil Type';
+}elseif($params['key']=='farmertype'){
+    $lable = 'Farmer Type';
+    $title = 'Add New Farmer Type';
+}elseif($params['key']=='priority'){
+    $lable = 'Farmer Priority';
+    $title = 'Add New Priority';
+}elseif($params['key']=='reftype'){
+    $lable = 'Reference Type';
+    $title = 'Add Reference Type';
+}elseif($params['key']=='irrigation'){
+    $lable = 'Way of Irrigation';
+    $title = 'Add Irrigation';
+}elseif($params['key']=='sowing'){
+    $lable = 'Sowing Type';
+    $title = 'Sowing Type';
+}elseif($params['key']=='source'){
+    $lable = 'Source of water';
+    $title = 'Source of water';
+}else{
+    
+}
+?>
+
+
+
+
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+
+<script>
+
+
+
+function validatedistrict()
+{  
+        if(document.getElementById("keydata").value=="")
+	{
+	 alert("<?php echo 'Kindly fill '.$lable;?>");
+	 document.getElementById("keydata").focus();
+	 return false;
+	}
+	
+	
+        
+        
+         
+  return true;
+}
+          
+            
+</script>
+
+
+
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Add New <?php echo $lable; ?></h1>
+        </div>
+        
+        <ul class="breadcrumb">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li >All Masters<span class="divider">/</span></li>
+                        <li class="active"><?php echo $lable;?><span class="divider">/</span></li>
+           
+        </ul>
+<?php if($params['type']=='success') { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				Data inserted successfully.
+		</div>	
+		<?php } ?>
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+	<div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+  margin-right: 10px;
+  -webkit-border-radius: 10px!important;">
+             
+      
+       <form id="myform" method="post" name="addtehsilform" action="/appsetting/add-key"  onsubmit="return validatedistrict();"  >
+           <input type="hidden" value="<?php echo $params['key'];?>" name="keyname" id="keyname" placeholder="<?php echo $lable; ?>...">
+            <fieldset>
+            <legend><?php echo $lable;?> Details</legend> 
+            
+       
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;"><?php echo $lable; ?> :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;"> 
+                     <input type="text" value="" name="keydata" id="keydata" placeholder="<?php echo $lable; ?>..."> 
+                  </div>
+                </div>
+            	</div>
+                
+		 		 <div class="clear"></div>
+            </div>
+            
+            </fieldset>
+           
+           
+          
+              <div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+              <button type="button" class="btn btn-primary" value="Cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary" value="Save">Add <?php echo $lable; ?> Info</button>
+              </div>
+        </form>
+</div>
+    </div>
+
+
+

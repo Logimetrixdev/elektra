@@ -1,0 +1,37 @@
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />  
+<fieldset>
+            <legend>Village list for region <?php echo $this->regionDetails['RegionName'];?></legend>
+            <h3>Total no of Villages: <?php echo count($this->VillageList);?></h3>
+            <div class="frmRow" style="float: left; width: 100%;">
+                <table style=" width: 100%;">
+                    <tbody>
+                        
+                            <?php 
+                            if(count($this->VillageList)>0){
+                            $i=1;
+                            $j=1;
+                            
+                            foreach($this->VillageList as $village){?>
+                            <?php if($j==1) { ?><tr><?php } ?>
+                            <td style="font-size:13px; font-weight:600;" align="left"><b><?php echo $i;?>. </b></td>
+                            <td style="font-size:13px; font-weight:600;"><input type="checkbox" name="vill[]" value="<?php echo $village['id'];?>" style="margin: 0 2px 0 6px;
+    vertical-align: sub;"/> <?php echo $village['village_name'];?></td>
+                             <?php 
+                             
+                             $j++;
+                             if($i%5==0) { $j=1;}
+                             if($j==1) { ?> </tr> <?php }
+                             ?>
+                            <?php $i++;  } 
+                            }?>
+                       
+                    </tbody>
+                </table>
+              
+		 <div class="clear"></div>
+            </div>
+            
+  </fieldset>

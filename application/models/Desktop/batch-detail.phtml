@@ -1,0 +1,134 @@
+<?php $orderDetails = $this->order;
+
+ ?>
+<script type="text/javascript">
+function goback() {
+    history.go(-1);
+}
+</script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.css" />
+
+        
+	<div class="header" style="margin-top:0;">
+	    <h1 class="page-title">Order Details</h1>
+	</div>
+        
+        <ul class="breadcrumb" style="margin-top:48px;">
+            <li><a onclick="parent.location.href='/dashboard' " style="cursor:pointer;">Home</a> <span class="divider">/</span></li>
+            <li class="active">Order Details</li>
+        </ul>
+
+        <div class="container-fluid" style="padding-top: 112px !important;">
+            <div class="row-fluid">
+			
+<div class="well" style="overflow:auto;">
+      
+    <table class="table tablesorter">
+      <thead>
+	<tr>
+            <th colspan="5" style="text-align: center; font-size: 14px;"><b>Farmer Details</b></th> 
+	 </tr>
+        <tr>
+		  <th>Order No.</th>
+          <th>Farmer Name</th>
+          <th>Farmer Code</th>
+          <th>Farmer Village</th>
+          <th>Allocated FE</th>
+          <th>Nearest DC</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+       
+	  
+        <tr>
+		<td><?php echo $orderDetails['orderId'];?></td>
+          <td><?php echo $orderDetails['FarmerName'];?></td>
+	  <td><?php echo $orderDetails['FarmerCode'];?></td>
+          <td><?php echo $orderDetails['village_name'];?></td>    
+          <td><?php echo $orderDetails['AllotedFieldEnggName'];?> [<?php echo $orderDetails['AllotedFieldEngg'];?>]</td> 
+           <td><?php echo $orderDetails['distribution_center'];?></td> 
+           
+        </tr>
+	
+
+      </tbody>
+     </table>
+    <table class="table tablesorter">
+      <thead>
+	<tr>
+            <th colspan="4" style="text-align: center; font-size: 14px;"><b>Seed Details</b></th> 
+	 </tr>
+        <tr>
+          <th>Seed Name</th>
+          <th>Seed Type</th>
+          <th>Seed Sub Type</th>
+          <th>Row Type</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $orderDetails['SeedName'];?></td>
+	  <td><?php echo $orderDetails['seedType'];?></td>
+          <td><?php echo $orderDetails['seedsubtype'];?></td>    
+          <td><?php echo $orderDetails['rowtype'];?></td>    
+        </tr>
+	
+
+      </tbody>
+       <thead>
+       <tr>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Amount To Be Pay(Advance)</th>
+          <th>Paid Amount</th>
+        </tr>
+      </thead>
+       <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $orderDetails['Qty'];?> <?php echo $orderDetails['unit'];?></td>
+	  <td><?php echo $orderDetails['Rate'];?> Rs/-</td>
+          <td><?php echo $orderDetails['advance_to_be_pay'];?> Rs/-</td>    
+          <td><?php echo $orderDetails['payment_recevied'];?> Rs/-</td>    
+        </tr>
+	
+
+      </tbody>
+      
+        <thead>
+       <tr>
+          <th>Booking Date</th>
+          <th>Expected Delivery Date</th>
+          <th>Farmer Signature</th>
+          <th>FE Signature</th>
+        </tr>
+      </thead>
+       <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $orderDetails['booking'];?> </td>
+	  <td><?php echo $orderDetails['delivery'];?></td>
+          <td><img src="<?php echo $this->seedsignature.''.$orderDetails['FarmerSignatureOrder'];?>" style="height: 150px;"/></td>  
+           <td><img src="<?php echo $this->seedsignature.''.$orderDetails['FeSignatureOrder'];?>" style="height: 150px;"/></td>
+             
+        </tr>
+	
+
+      </tbody>
+    </table>
+    
+  
+</div>
+ 
+	</div>
+</div>
+
+    
+   

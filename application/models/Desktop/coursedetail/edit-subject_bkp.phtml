@@ -1,0 +1,167 @@
+  <?php
+  //$userList = $this->getAllUser;
+   $userList = $this->getAllInstitute;
+   $courseListById = $this->courseListById;
+   $getsubjectListBycourseId = $this->getsubjectListBycourseId;
+   $getsubjectgroupList = $this->getsubjectgroupList;
+  
+
+  ?>
+
+
+<!--<script src="/js1/jquery-1.8.3.js"></script>-->
+
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.min.js"></script>-->
+
+
+<script type="text/javascript">
+	(function($, window)
+	{
+		$(function($)
+		{
+			// that's it!
+			$("textarea#id_cazary").cazary();
+
+			// customized editor
+			$("textarea#id_cazary_minimal").cazary({
+				commands: "MINIMAL"
+			});
+			$("textarea#id_cazary_full").cazary({
+				commands: "FULL"
+			});
+		});
+	})(jQuery, window);
+</script>
+<script>
+    $(function() {
+		$( "#d" ).datepicker({
+			showOn: "button",
+			buttonImage: "http://runapp.me/images/calendar.gif",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true,
+			buttonText:'Date Of Birth',
+                        changeMonth: true,
+                        changeYear: true
+		});
+			
+               
+              
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+	$(function() {
+$('#myTable').on('click', 'input[type="button"]', function () {
+    $(this).closest('tr').remove();
+})
+$('p input[type="button"]').click(function () {
+    $('#myTable').append('<tr> <td><input type="text" name="subjectcode[]" class="strength"  id="subjectcode"/></td><td><input type="text" name="subjectname[]" class="strength" /></td><td><input type="button" value="Delete" /></td></tr>')
+});
+});
+</script>
+
+  <section id="content">
+    
+         <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper" class=" grey lighten-3">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                
+                <ol class="breadcrumb">
+                 <li><a href="index-2.html">Dashboard</a>
+                  </li>
+                  <li><a href="#">Subject Detail</a>
+                  </li>
+                  <li class="active">Edit Subject Detail</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        
+
+
+        <!--start container-->
+        <div class="container">
+         
+
+         
+        <form class="col s12" method="post" action="/coursedetail/add-subject" enctype="multipart/form-data">
+
+          <!--Form Advance-->          
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+			        <?php if($this->successMessage) { ?>
+                                <div class="alert alert-success">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><?php echo $this->successMessage;?>
+                                </div>  
+				    <?php } ?> 
+                <h4 class="header2">Course Name &nbsp;:-&nbsp;<?php echo $courseListById['course_name'];   ?></h4>
+                <div class="row">
+                  <input type = "hidden" name = "courseId" value="<?php echo $courseListById['id'];  ?>">
+                    
+                  
+                    
+                                 
+
+					  <div class="row">
+                </div>
+         <!--Form Advance-->          
+          <div class="row" style="padding:60px;"> 
+
+	 <div class="card-panel" style="margin-top:-53px;">
+    <div class="well" style="height:auto;">
+ 
+    <table  id="myTable">
+      <thead>
+
+ <tr>
+<th>Subject Code</th><th>Subject Name</th><th>Action </th>
+ </tr>
+      </thead>
+      <tbody>
+       <?php foreach($getsubjectListBycourseId as $val){ ?>
+	        
+        <tr>
+		    
+			<td><input type = "hidden" name = "id[]" value="<?php echo $val['id'];  ?>"><input type="text" name="subjectcode[]" value="<?php echo $val['subject_code'];  ?>" class="strength" id="subjectcode" required/></td>			
+			<td><input type="text" name="subjectname[]" value="<?php echo $val['subject_name'];  ?>"  class="strength" /></td>
+			
+			
+			<td><input type="button" value="Delete" /> </td>
+       </tr>
+	   <?php }?>
+	
+      </tbody>
+    </table>
+    <p>
+    <input type="button" value="Insert row">
+</p>
+</div>
+<div class="row">
+                        <div class="input-field col s12">
+                          
+                          <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Update Subject Detail
+                            <i class="mdi-content-send right"></i>
+
+                          </button>
+</div>
+                        </div>
+                    
+                    </div>
+</div>
+</div>
+</div>
+</div>
+</form>
+   </div>
+     </div>  
+  </section>

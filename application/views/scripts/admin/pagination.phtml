@@ -1,0 +1,43 @@
+<div class="paging">
+<?php
+print_r($_GET);
+?>
+		<?php if (isset($this->previous)): ?>
+
+       <a href="<?= $this->url(array('page' => $this->previous)); ?>">< Prev</a>
+
+          <?php else: ?>
+
+          <a herf="javascript:void(0);" class="disable">< Prev</a>
+
+           <?php endif; ?>
+
+		   
+
+            <?php foreach ($this->pagesInRange as $page): ?>
+
+            <?php if ($page != $this->current): ?>
+
+        <a href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a>
+
+         <?php else: ?>
+
+        <a href="javascript:void(0);" class="pagenumactive"><?= $page; ?></a>
+
+             
+
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+
+         <?php if (isset($this->next)): ?>
+
+       <a href="<?= $this->url(array('page' => $this->next)); ?>">Next ></a>
+
+        <?php else: ?>
+
+        <a herf="javascript:void(0);" class="disable">Next ></a>
+
+         <?php endif; ?>
+
+</div>

@@ -1,0 +1,210 @@
+<?php 
+$record = $this->paginator; 
+$totalrec = $this->totalrec;
+$get = $this->get;
+$params = $this->params;
+
+// Start reset url code
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+//echo "<pre>"; print_r($authStorage->read()); die;
+$role = $authStorage->read()->Role;
+$getAllUserInfo = $this->getAllUserInfo;
+// echo '<pre>';
+// print_r($record);
+// exit();
+
+ if($params['date']){
+      $date  =$params['date'];
+   }else{
+    $date =  date("Y-m-d");
+   }
+?>
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+<!-- fancybox start here -->
+<script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript">
+
+    $(function() {
+    $( "#date" ).datepicker({
+      showOn: "button",
+      buttonImage: "http://runapp.me/images/calendar.gif",
+      dateFormat: 'yy-mm-dd',
+      buttonImageOnly: true,
+      buttonText:'Date Of Birth',
+                        changeMonth: true,
+                        changeYear: true
+    });
+      
+               
+              
+});
+ function getSearch(datacode,login_status,date){
+
+// if(date_from!=''&& date_to!=''){
+document.search.action="/felogindetail/login-detail/datacode/"+datacode+"/login_status/"+login_status+"/date/" +date;  
+// }
+
+document.search.submit();
+ 
+}
+
+function disableBlock(value){
+
+	if (value != '') {
+      document.getElementById('login_status').disabled = true;
+      document.getElementById("login_status").options[0].selected = 'selected';
+  } 
+  else {
+      document.getElementById('login_status').disabled = false;
+  }
+
+}
+</script>
+
+
+
+
+<!-- Search ajax end here -->
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Report </h1>
+        </div>
+        <div class="breadcrumb">
+        <div style="position:relative;">
+        <ul class="imop">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+            <li class="active">User Login Report</li> 
+        </ul>
+        <?php if($params['type']=='sucess') { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				Field executive has been successfully updated
+		</div>	
+		<?php } ?>
+		
+		
+        </div>
+
+        </div>
+<script>
+$(document).ready(function() {
+    $('.breadcrumb').css({'width':(($(window).width())-270)+'px'});
+	$(window).resize(function(){
+       $('.breadcrumb').css({'width':(($(window).width())-270)+'px'}); 
+    });
+});
+</script>
+
+
+
+
+
+<style>
+.tableheading{
+	background-color: #e2e2e2;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #cfcccc;
+}
+.txt_center{
+	text-align:center !important;
+}
+.imop{
+margin:0px !important;
+}
+</style>
+        <div class="container-fluid" style="padding-top:162px;">
+
+<!--- user filtor by role end -->
+
+ <div class="row-fluid" style="margin-top:10px;">
+                    
+<div class="search-well">
+  	<div class="form-inline">
+    <form class="form-inline" name="search" method="post"  style="margin-bottom:10px;">         
+    <select name="user" class="input-large" id="user" onchange="disableBlock(this.value)">
+       <option  value =''>--Select Field User--</option>
+       <?php foreach($getAllUserInfo as $key) { ?>
+                   <option  value ='<?php  echo $key['LoginID'] ?>'<?php if($params['user'] !='' && $params['user']==$key['LoginID']){echo ' selected="selected"';} ?>><?php  echo $key['StaffName'].'('.$key['LoginID'].')' ?></option>
+       <?php  } ?>
+    </select>
+    <select name="login_status" class="input-large" id="login_status" >
+       <option  value =''>--Select Status--</option>
+       <option value='yes'<?php if($params['login_status'] =='yes'){echo ' selected="selected"';} ?>>Yes</option>
+       <option value='no'<?php if($params['login_status'] =='no'){echo ' selected="selected"';} ?>>No</option>
+    </select>
+
+     <input type="text" name="date" id="date" value="<?php echo $params['date'];   ?>" placeholder="Choose Date To">
+    <button type="button" onclick="getSearch(this.form.user.value,this.form.login_status.value, this.form.date.value)"  class="btn" id="searchbtn" style="position:relative; text-align:center; padding-left:22px;"><span class="search"></span> Go</button>
+  </form>
+            
+  	</div>
+</div>
+
+
+			
+<div class="well" style="overflow:scroll; height:auto;">
+    <table class="table tablesorter">
+      <thead>
+
+	  <tr><td colspan="13" class="tableheading">User Login Report</td></tr>
+        <tr>
+<th>Name </th>
+<th>Login ID</th>
+<th >Is Login</th>
+<th >Date</th>
+
+ </tr>
+      </thead>
+      <tbody>
+       <?php
+	   	
+	if($totalrec){
+          $i=1;
+	  foreach($record as $key=>$val){
+	      $users = new Application_Model_Users();
+
+          $userdetail= $users->getUserLoginDetailByLoginId($val['LoginID'], $date);
+
+        
+         ?>
+        <tr>
+          <td><?php echo $val['StaffName'];?></td>
+          <td><?php echo $val['LoginID'];?></td>
+          <td><?php  if($userdetail){ echo 'Yes';}else{ echo "<p style='color:red'>No</p>";}?></td>
+          <td><?php echo $date;?></td> 
+
+
+<?php } } else { ?>  
+	      <tr><td colspan="8">No user Login.</td></tr>
+	   <?php } ?>
+
+      </tbody>
+    </table>
+</div>
+
+<!--Pagingnation Start-->
+<?php if($totalrec > $this->perPage) { echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); } ?>
+	</div>
+</div>
+</div>
+    
+   

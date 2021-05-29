@@ -1,0 +1,62 @@
+	@page {  }
+	table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+	td, th { vertical-align:top; font-size:10pt;}
+	h1, h2, h3, h4, h5, h6 { clear:both }
+	ol, ul { margin:0; padding:0;}
+	li { list-style: none; margin:0; padding:0;}
+	<!-- "li span.odfLiEnd" - IE 7 issue-->
+	li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+	span.footnodeNumber { padding-right:1em; }
+	span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+	* { margin:0;}
+	.gr1 { padding-top:0.022in; padding-bottom:0.022in; padding-left:0.022in; padding-right:0.022in; }
+	.P1 { text-align:left ! important; writing-mode:lr-tb; color:#000000; font-family:Arial; font-size:11pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	.ta1 { writing-mode:lr-tb; }
+	.Default { font-family:Arial; padding:0.028in; color:#000000; font-size:11pt; }
+	.ce1 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce10 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#99ccff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:middle; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce11 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce12 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:right ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce13 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-style:none; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce14 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce15 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce16 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce17 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri;background-color: #99CCFF; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:middle; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:underline; font-weight:bold; border: 1px solid ! Important;}
+	.ce18 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#99ccff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:middle; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold;border: 1px solid ! Important; }
+	.ce19 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce2 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; vertical-align:top; text-align:right ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce20 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce21 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce22 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce23 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-bottom-width:0.0133cm; border-bottom-style:solid; border-bottom-color:#3c3c3c; border-left-width:0.0133cm; border-left-style:solid; border-left-color:#3c3c3c; border-right-style:none; border-top-width:0.0133cm; border-top-style:solid; border-top-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce24 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce25 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:transparent; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce26 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#ffffff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce3 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri;background-color: #99CCFF; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal;border: 1px solid ! Important; }
+	.ce4 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce5 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid ! important; border-color:#3c3c3c; vertical-align:top; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important; }
+	.ce6 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:right ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce7 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:right ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important; }
+	.ce8 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri; background-color:#fff; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:top; text-align:right ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.ce9 { color:#000000; font-size:11pt; padding:0.028in; font-family:Calibri;background-color: #99CCFF; border-width:0.0133cm; border-style:solid; border-color:#3c3c3c; vertical-align:middle; text-align:center ! important; margin-left:0in; writing-mode:page; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; border: 1px solid ! Important;}
+	.co1 { width:0.7626in; border: 1px solid !important; }
+	.co10 { width:1.1118in; }
+	.co11 { width:1.2602in; }
+	.co2 { width:1.7366in; }
+	.co3 { width:5.952in; }
+	.co4 { width:3.3929in; }
+	.co5 { width:2.7008in; }
+	.co6 { width:2.711in; }
+	.co7 { width:1.8429in; }
+	.co8 { width:4.6701in; }
+	.co9 { width:2.7638in; }
+	.ro1 { height:0.2083in;  border: 1px solid !important; }
+	.ro2 { height:0.4583in; }
+	.ro3 { height:0.3646in; }
+	.ro4 { height:0.5937in; }
+	.ro5 { height:0.6772in; }
+	.ro6 { height:0.4165in; }
+	.ro7 { height:0.2791in; }
+	.T1 { color:#ffffff; font-family:Tahoma; font-size:8pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+	.T2 { color:#ffffff; font-family:Tahoma; font-size:8pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	

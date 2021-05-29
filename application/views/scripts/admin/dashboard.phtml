@@ -1,0 +1,428 @@
+<?php 
+$presentUser = $this->presentUserCount?$this->presentUserCount:0;
+$getAllUserCount = $this->getAllUserCount;
+$absentUser = $getAllUserCount - $presentUser;
+$absentUser = $absentUser?$absentUser:0;
+$jobWithUserStatusArr = $this->jobWithUserStatusArr;
+$currJobStatusArr = $this->currJobStatusArr;
+$currFsrClosedArr = $this->currFsrClosedArr;
+$currTtClosedArr = $this->currTtClosedArr;
+$totalSiteVisitCount = $this->totalSiteVisitCount?$this->totalSiteVisitCount:0;
+$LowBatteryCount = $this->LowBatteryCount?$this->LowBatteryCount:0;
+$OnlineUserCount = $this->OnlineUserCount?$this->OnlineUserCount:0;
+$OfflineUserCount = $getAllUserCount - $OnlineUserCount;
+$OfflineUserCount = $OfflineUserCount?$OfflineUserCount:0;
+$getGpsInfoArr = $this->getGpsInfoArr;
+$moveStatusArr = $this->moveStatusArr;
+$params = $this->params;
+?>
+
+ <!-- fancybox start here -->
+<script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+ <script type="text/javascript">
+		$(document).ready(function() {	
+					$("a#showuserlocation").fancybox({
+					'width' : "100%",
+					'height' : "100%",
+					'speedIn'		:	600, 
+					'speedOut'		:	200, 
+					'overlayShow'	:	true
+					});	
+				});	
+</script> 
+
+<!-- fancybox end here -->
+<script>
+$(function(){
+	$('#selectRoleHere').bind('click',function(){
+		var role = $(this).val();
+		getFiltorUsingAjax(role);
+	});
+	
+	$("#selectUserList").bind('change',function(){
+		var statffid = $(this).val();
+		var role = $("#selectRoleHere").val();
+		window.location = '/admin/dashboard/role/'+role+'/staffUser/'+statffid;
+	})
+});
+
+
+<?php
+if($params['role'])
+{
+?>
+getFiltorUsingAjax('<?php echo $params['role'];?>');
+<?php
+}
+?>
+</script>
+<style>
+.numclass {
+	position: absolute !important;
+	margin-left: -20px !important;
+	margin-top: -9px !important;
+	font-weight: bold !important;
+}
+.pnumclass {
+	position: relative !important;
+	margin-left: 12px !important;
+}
+</style>
+<script src="/js/highcharts.js"></script>
+<script src="/js/exporting.js"></script>
+<input type="hidden" id="urlrole" value="<?php echo $params['staffUser'];?>" />
+<div class="content">
+<div class="header"> 
+  <!-- <div class="stats">
+			<p class="stat"><span class="number">53</span>tickets</p>
+			<p class="stat"><span class="number">27</span>tasks</p>
+			<p class="stat"><span class="number">15</span>waiting</p>
+		   </div> -->
+  
+  <h1 class="page-title">Dashboard</h1>
+</div>
+<ul class="breadcrumb">
+  <li><a href="/admin/dashboard">Home</a> <span class="divider">/</span></li>
+  <li class="active">Dashboard</li>
+  <li><a href="/admin/fielduserlocation" style="float: right;
+margin-left: 702px;
+border: 1px solid;
+padding-left: 5px;
+padding-right: 5px;
+background-color: #4d5b76;
+color: #fff;" id="showuserlocation" class="iframe">View Field User Location</a></li>
+</ul>
+<div class="container-fluid">
+<!--- user filtor by role --->
+<?php 
+echo $this->selectRole;
+?>
+<select id="selectUserList">
+<option value="">Select User</option>	
+</select>
+<a href="/admin/dashboard">Reset</a>
+<!--- user filtor by role end --->
+
+  <div class="row-fluid">
+    <div class="row-fluid"> 
+      <!--Users Tab Start-->
+      <div class="acme_rightP">
+      <!--Users Tab Start-->
+      <div class="block span6" id="acme_aan">
+        <div class="block-heading"><a href="javascript:void(0);" style="cursor:default;">Alert and Notifications (5 New)</a></div>
+        <div id="notification" class="block-body collapse in">
+          <table class="table">
+            <thead>
+              <tr>
+                <th colspan="2">Alert / Notification</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2">Mark</td>
+                <td>the_mark7</td>
+              </tr>
+              <tr>
+                <td colspan="2">Ashley</td>
+                <td>ash11927</td>
+              </tr>
+              <tr>
+                <td colspan="2">Audrey</td>
+                <td>audann84</td>
+              </tr>
+              <tr>
+                <td colspan="2">John</td>
+                <td>jr5527</td>
+              </tr>
+              <tr>
+                <td colspan="2">Aaron</td>
+                <td>aaron_butler</td>
+              </tr>
+              <tr>
+                <td colspan="2">Chris</td>
+                <td>cab79</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><a href="users.html">More...</a></p>
+        </div>
+      </div>
+      <!--Users Tab Start--> 
+      </div>
+      <div class="acme_leftP">
+	  
+      <div class="block" id="acme_ls"><a href="javascript:void(0);" class="block-heading" style="cursor:default;">Graphs</a><!-- <a data-toggle="collapse" class="block-heading" href="#page-stats">Latest Stats</a>-->
+        <div class="block-body in collapse" id="page-stats" style="height: auto;">
+     <?php
+	 if(!$getAllUserCount)
+	 {
+	 ?>
+	 <div class="stat-widget-container">
+	 No Graphs
+	 </div>
+	 <?php
+	 }
+	 else
+	 {
+	 ?>
+	      <div class="stat-widget-container">
+            <div class="stat-widget">
+              <div class="stat-button"> 
+                <script type="text/javascript">
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+    	
+    	// Build the chart
+        $('#user').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'User Graph :'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: false
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'User',
+                data: [
+                   ['Total online: <?php echo $OnlineUserCount;?>',   <?php echo $OnlineUserCount;?>],
+                    {
+                        name: 'Total offline: <?php echo $OfflineUserCount;?>',
+                        y: <?php echo $OfflineUserCount;?>,
+                        sliced: true,
+                        selected: true
+                    },
+              
+                ]
+				
+            }]
+        });
+    });
+    
+});
+</script>
+                <div id="user" style="width: 100%; height: 170px; margin: 0 auto"></div>
+              </div>
+            </div>
+            <div class="stat-widget">
+              <div class="stat-button"> 
+                <script type="text/javascript">
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+    	
+    	// Build the chart
+        $('#ticket').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Ticket Graph :'
+            },
+            tooltip: {
+        	    pointFormat: ': <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: false
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                    ['Total open tickets: <?php echo $currJobStatusArr['total_processing'];?>',   <?php echo $currJobStatusArr['total_processing'];?>],
+                    ['Total closed: <?php echo $currJobStatusArr['total_complete'];?>',       <?php echo $currJobStatusArr['total_complete'];?>],
+                    {
+                        name: 'Total pending:  <?php echo $currJobStatusArr['total_pending'];?>',
+                        y: <?php echo $currJobStatusArr['total_pending'];?>,
+                        sliced: true,
+                        selected: true
+                    },
+              
+                ]
+            }]
+        });
+    });
+    
+});
+</script>
+                <div id="ticket" style="width:100%; height: 170px; margin: 0 auto"></div>
+              </div>
+            </div>
+            <div class="stat-widget">
+              <div class="stat-button"> 
+                <script type="text/javascript">
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+    	
+    	// Build the chart
+        $('#attendence').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Attendence Graph :'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: false
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'User',
+                data: [
+                    ['Present: <?php echo $presentUser;?>',   <?php echo $presentUser;?>],
+                    {
+                        name: 'Absent: <?php echo $absentUser;?>',
+                        y: <?php echo $absentUser;?>,
+                        sliced: true,
+                        selected: true
+                    },
+              
+                ]
+            }]
+        });
+    });
+    
+});
+</script>
+                <div id="attendence" style="width:100%; height: 170px; margin: 0 auto"></div>
+              </div>
+            </div>
+          </div>
+	 <?php
+	 }
+	 ?>
+        </div>
+      </div>
+      
+      <!--History Tab Start-->
+      <div class="block span6" id="acme_status">
+        <div class="block-heading"> 
+          <!--<span class="block-icon pull-right">
+                <a href="#" class="demo-cancel-click" rel="tooltip" title="Click to refresh">
+				 <i class="icon-refresh"></i>
+				</a>
+            </span>--> 
+          <a href="javascript:void(0);" style="cursor:default;">Stats</a>
+          <!--<a href="#widget2container" data-toggle="collapse">Stats</a>--> </div>
+        <div id="widget2container" class="block-body collapse in">
+          <table class="table list">
+            <tbody>
+              <tr>
+                <td><p class="pnumclass"><span class="numclass">1) </span>Present</p>
+                  <p class="pnumclass">Absent</p></td>
+                <td><p><?php echo $presentUser;?></p>
+                  <p><?php echo $absentUser;?></p></td>
+                <td class="addleftcss"><p class="pnumclass"><span class="numclass">2) </span>Moving</p>
+                  <p class="pnumclass">Not Moving</p></td>
+                <td><p><?php echo $moveStatusArr['total_move']?$moveStatusArr['total_move']:0;?></p>
+                  <p><?php echo $moveStatusArr['total_notmove']?$moveStatusArr['total_notmove']:0;?></p></td>
+              </tr>
+              <tr>
+                <td><p class="pnumclass"><span class="numclass">3) </span>Toward Site</p>
+                  <p class="pnumclass">On Site</p>
+                  <p class="pnumclass">Left Site</p></td>
+                <td><p><?php echo $jobWithUserStatusArr['total_toward_site'];?></p>
+                  <p><?php echo $jobWithUserStatusArr['total_at_site'];?></p>
+                  <p><?php echo $jobWithUserStatusArr['total_left_site'];?></p></td>
+                <td class="addleftcss"><p class="pnumclass"><span class="numclass">4) Trouble Ticket</span><br>
+                    Complete</p>
+                  <p class="pnumclass">Pending</p>
+                  <p class="pnumclass">Processing</p></td>
+                <td><p><br>
+                    <?php echo $currJobStatusArr['total_complete'];?></p>
+                  <p><?php echo $currJobStatusArr['total_pending'];?></p>
+                  <p><?php echo $currJobStatusArr['total_processing'];?></p></td>
+              </tr>
+              <tr>
+                <td><p class="pnumclass"><span class="numclass">5) FSR Filled</span><br>
+                    Onsite</p>
+                  <p class="pnumclass">Offsite</p></td>
+                <td><p><br>
+                    <?php echo $currFsrClosedArr['totalonsite'];?></p>
+                  <p><?php echo $currFsrClosedArr['totaloffsite'];?></p></td>
+                <td class="addleftcss"><p class="pnumclass"><span class="numclass">6) TT closed</span><br>
+                    Onsite</p>
+                  <p class="pnumclass">Offsite</p></td>
+                <td><p><br>
+                    <?php echo $currTtClosedArr['totalonsite'];?></p>
+                  <p><?php echo $currTtClosedArr['totaloffsite'];?></p></td>
+              </tr>
+              <tr>
+                <td><p class="pnumclass"><span class="numclass">7)</span><br>
+                    Site visit count</p></td>
+                <td><p><br>
+                    <?php echo $totalSiteVisitCount;?></p></td>
+                <td class="addleftcss"><p class="pnumclass"><span class="numclass">8)</span><br>
+                    Low battery</p></td>
+                <td><p><br>
+                    <?php echo $LowBatteryCount;?></p></td>
+              </tr>
+              <tr>
+                <td><p class="pnumclass"><span class="numclass">9)    Mobile client service</span><br>
+                    Stopped</p>
+                  <p class="pnumclass">Running</p></td>
+                <td><p><br>
+                    <?php echo $OfflineUserCount;?></p>
+                  <p><?php echo $OnlineUserCount;?></p></td>
+                <td class="addleftcss"><p class="pnumclass"><span class="numclass">10) Mobile client GPS</span><br>
+                    On</p>
+                  <p class="pnumclass">Off</p></td>
+                <td><p><br>
+                    <?php echo $getGpsInfoArr[1]['gps_status_count']?$getGpsInfoArr[1]['gps_status_count']:0;?></p>
+                  <p><?php echo $getGpsInfoArr[0]['gps_status_count']?$getGpsInfoArr[0]['gps_status_count']:0;?></p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--History Tab End--> 
+      </div>
+      
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+</div>

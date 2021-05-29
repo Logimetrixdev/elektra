@@ -1,0 +1,176 @@
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+<script>
+function hideBox(value){
+
+   if(value =="no")
+    document.getElementById("block").style.display = "none";
+   else
+    document.getElementById("block").style.display = "block";
+}
+
+
+
+function validateUser(){  
+  if(document.getElementById("description").value==""){
+     alert("Please enter  place description.");
+     document.getElementById("description").focus();
+     return false;
+  }  
+
+
+  if(document.getElementById("person").value==""){
+     alert("Please enter concerned person.");
+     document.getElementById("person").focus();
+     return false;
+  }       
+  return true;
+}
+</script>
+
+
+
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Add Information </h1>
+        </div>
+        
+        <ul class="breadcrumb">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li class="active">Add Information<span class="divider">/</span></li>
+      <li class="active">Add Place Information<span class="divider">/</span></li>
+           
+        </ul>
+<?php if($this->successMessage) { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<?php echo $this->successMessage;?>
+		</div>	
+		<?php } ?>
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+	<div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+  margin-right: 10px;
+  -webkit-border-radius: 10px!important;">
+             
+     
+
+       <form id="myform" method="post" name="fielduserform" action="/addinformation/add-place-information" enctype='multipart/form-data' onsubmit="return validateUser();">
+            <fieldset>
+            <legend>Place Information</legend>
+              <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Place Description * :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="description" id="description" placeholder="Enter Description"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Concerned Person * :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="person" id="person" placeholder="Enter Person"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Designation :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="designation" id="designation" placeholder="Enter Designation"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Contact :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="contact" id="contact" placeholder="Enter Contact No"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+               <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Address :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <textarea name="address" placeholder="Enter Address"></textarea>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+      
+
+
+            <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Image :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="file" value="" name="photograph_pi" id="photograph_pi" placeholder="Choose Photo"> 
+                </div>
+              </div>
+            </div>    
+        <div class="clear"></div>
+            </div>
+            </fieldset>
+
+
+              <div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+                    <button type="submit" class="btn btn-primary" value="Save">Add Place Info</button>
+              </div>
+          </div>
+      
+         
+        </form>
+</div>
+
+    </div>
+
+
+

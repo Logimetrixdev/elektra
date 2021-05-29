@@ -1,0 +1,70 @@
+<?php 
+
+$user_search = $_GET['user_search'];
+$search = $_GET['search'];
+$arrpre = array('page' => $this->previous);
+$arrnext = array('page' => $this->next);
+if($user_search)
+{
+	$arrpre['user_search'] = $user_search;
+	$arrnext['user_search'] = $user_search;
+}
+if($search)
+{
+	$arrpre['search'] = $search;
+	$arrnext['search'] = $search;
+}
+?>
+
+<div class="pagination">
+<ul>
+		<?php if (isset($this->previous)): ?>
+
+        <li><a href="<?= $this->url($arrpre); ?>">< Prev</a> </li>
+
+          <?php else: ?>
+
+           <li><a herf="javascript:void(0);" class="disable">< Prev</a> </li>
+
+           <?php endif; ?>
+
+		   
+            <?php foreach ($this->pagesInRange as $page): ?>
+
+            <?php 
+			$arrpage = array('page' => $page);
+			if($user_search)
+			{
+				$arrpage['user_search'] = $user_search;
+			}
+			if($search)
+			{
+				$arrpage['search'] = $search;
+			}
+			
+			
+			if ($page != $this->current): ?>
+
+         <li><a href="<?= $this->url($arrpage); ?>"><?= $page; ?></a> </li>
+
+         <?php else: ?>
+
+        <li> <a href="javascript:void(0);" class="pagenumactive"><?= $page; ?></a> </li>
+
+      
+      <?php endif; ?>
+
+        <?php endforeach; ?>
+
+         <?php if (isset($this->next)): ?>
+
+       <li> <a href="<?= $this->url($arrnext); ?>">Next ></a> </li>
+
+        <?php else: ?>
+
+         <li><a herf="javascript:void(0);" class="disable">Next ></a> </li>
+
+         <?php endif; ?>
+		 
+</ul>
+</div>

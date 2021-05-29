@@ -1,0 +1,431 @@
+<?php 
+$get = $this->get;
+$params = $this->params;
+//$allLands = $this->allLands;
+$getLandfarmerDetails = $this->getContactInformation;
+$getPlacedInformation= $this->getPlacedInformation;
+$getLoginUserInformation = $this->getLoginUserInformation;
+
+
+
+?>
+
+    
+<script type="text/javascript">
+function goback() {
+    history.go(-1);
+}
+</script>
+
+<!-- fancybox start here -->
+<script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript">
+	$(document).ready(function() {	
+				$("a#view-details").fancybox({
+				'transitionIn'	:	'elastic',
+				'transitionOut'	:	'elastic',
+				'width' : 800,
+				'height' : 500,
+				'speedIn'		:	600, 
+				'speedOut'		:	200, 
+				'overlayShow'	:	true
+				});	
+			});
+			
+			$(document).ready(function() {	
+					$("a#showfarmerpopups").fancybox({
+					'width' : "100%",
+					'height' : "100%",
+					'speedIn'		:	600, 
+					'speedOut'		:	200, 
+					'overlayShow'	:	true
+					});	
+				});	
+
+
+					
+</script> 
+
+<style>
+.CSSTableGenerator {
+	margin:0px;padding:0px;
+	width:100%;
+	<!--box-shadow: 10px 10px 5px #888888;-->
+	border:1px solid #000000;
+	
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+	
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+	
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+	
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+	
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#e5e5e5; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+	vertical-align:middle;
+	
+	
+	border:1px solid #000000;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:7px;
+	font-size:13px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}.CSSTableGenerator tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+		background:-o-linear-gradient(bottom, #cccccc 5%, #b2b2b2 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cccccc), color-stop(1, #b2b2b2) );
+	background:-moz-linear-gradient( center top, #cccccc 5%, #b2b2b2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#cccccc", endColorstr="#b2b2b2");	background: -o-linear-gradient(top,#cccccc,b2b2b2);
+
+	background-color:#cccccc;
+	border:0px solid #000000;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#000000;
+}
+.CSSTableGenerator tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #cccccc 5%, #b2b2b2 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cccccc), color-stop(1, #b2b2b2) );
+	background:-moz-linear-gradient( center top, #cccccc 5%, #b2b2b2 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#cccccc", endColorstr="#b2b2b2");	background: -o-linear-gradient(top,#cccccc,b2b2b2);
+
+	background-color:#cccccc;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}
+</style>
+
+
+<!-- fancybox end here -->
+ 
+ 
+
+
+    <!-- Le fav and touch icons -->
+
+
+    
+    <link href="/css/uibasetheme/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <link href="/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    
+   <!-- <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>-->
+    <script src="/js/jquery.ui.core.js" type="text/javascript"></script>
+    <script src="/js/jquery.ui.widget.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui.js"></script>
+    
+    
+    <script>
+          $(function () {
+              $('.tabs').tabs(
+                  { heightStyle: 'auto'});
+
+$('.call_log_ajax_fetch').click( function(){
+$.getJSON("/faultyincident/ajax-getcalllog/id/"+$(this).data("id"), function(data){
+    //alert("Data: " + data);
+$('#cc_tt_id').val(data.call_log_id);
+$('#cc_alarmtime').val(data.AlarmDate);
+$('#cc_osstime').val(data.TIMEONLY);
+$('#customer_tt').val(data.customer_tt_no);
+$('#remarks').val(data.remarks);
+
+$('.tabs').tabs( "option", "active", 1); 
+});}
+);
+
+
+
+   
+$( "#site_name" ).change(function(e) {
+    $.get( "/faultyincident/ajax-gettechname", { site_id: $( "#site_name" ).val() } )
+.done(function( data ) {
+    //alert("Data: " + data);
+  $('#tech_name').val(data);
+});
+});
+				  
+});
+     </script>
+      <script>
+        $(function () {
+            $('.accordion').accordion({
+                collapsible: true,
+                heightStyle: 'content',
+                autoHeight: false,
+                active:'none'
+            });
+        });
+    </script>
+    
+   
+
+ <style>
+        .formseparetor{
+            width:40%; float: left; padding: 5px;
+        }
+        .labeladd{
+             text-align: center;width: 160px; float: left;
+        }
+        .selectadd{
+            width: 50%;
+            
+        }
+    </style>
+
+
+<!-- Search ajax end here -->
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Captured Information </h1>
+        </div>
+        <div class="breadcrumb">
+        <div style="position:relative;">
+        <ul class="imop">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+            <li>Manage User <span class="divider">/</span></li> 
+             <li class="active">Captured Information Detail <span class="divider">/</span></li> 
+        </ul>
+        </div>
+        <a href="javascript:void(0);" style="position:absolute; right:10px; top:5px; border: 1px solid; background-color: #4d5b76; color: #fff; padding:1px 6px; font-size:12px; font-weight:bold; display:block;" id="showuserlocation" class="iframe" onClick="goback();">Back</a>
+        </div>
+<script>
+$(document).ready(function() {
+    $('.breadcrumb').css({'width':(($(window).width())-270)+'px'});
+	$(window).resize(function(){
+       $('.breadcrumb').css({'width':(($(window).width())-270)+'px'}); 
+    });
+});
+</script>
+
+
+
+        <div class="container-fluid" style="padding-top:162px;">
+
+<!--- user filtor by role end --->
+
+ <div class="row-fluid" style="margin-top:10px;">
+                    
+<div class="search-well">
+<!--<div class="form-inline">
+	<form class="form-inline" style="width:870px; float: left;" method="get" action="" style="margin-bottom:10px;">
+		<input type="text" name="search" id="search" placeholder="Search Here..." value="<?php //echo $get['search'];?>" class="input-large">
+		<input type="hidden" name="staffCode" id="staffCode" value="<?php //echo $this->supervisorStaffCode;?>">
+		<button type="submit" class="btn" id="searchbtn" style="position:relative; text-align:center; padding-left:22px;"><span class="search"></span> Go</button>
+		<button type="button" class="btn" > Reset</button>
+		</form>
+           
+	</div>-->
+</div>
+
+
+			
+
+  <form action="" name="downloadform" method="post">
+<div><div style="float:right; width:155px; padding:10px 0px;">
+<!-- <a href="#"><input type="submit" class="btn btn-primary" name="download" value="Download"></a>-->
+</div></div><br>
+
+<table width="100%" border="0" align="center" cellpadding="5" cellspacing="5">
+  <tr>
+    <td style="padding:5px; padding-top:10px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td bgcolor="#cccccc"><table width="100%" border="0" cellpadding="0" cellspacing="1" class="text_normal">
+
+	  
+    
+       
+
+ 
+	
+          </table></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</form>
+
+<div class="tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+                <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist" style="font-size: 80%;">
+                    <li><a href="#oosUpdate">Captured Information </a></li>
+                    <li><a href="#confirmCall">Place Information</a></li>
+                </ul>
+                <div id="oosUpdate">
+                   <form>
+                       <fieldset>
+                            <div class="well" style="overflow:scroll; height:auto;">
+                               <div class="CSSTableGenerator" >
+                                   <table border="1">
+                                      <tr>
+                                            <td>S.No.</td>
+                                            <td>Name</td>
+                                            <td>Mobile</td>
+                                            <td>Whatsapp No</td>
+                                            <td>Polling Both Id</td>  
+                                            <td>Availability</td>                                           
+                                            <td>Date</td>
+                                            <td>View Position</td>
+                                            <td>View</td>                                            
+                                       </tr>
+    
+       
+                                        <?php  if($getLandfarmerDetails){
+                                                          $i=1;             
+                                                          foreach($getLandfarmerDetails as $val){
+                                         ?>
+                                                            <tr>
+                                                                <td><?php echo $i; ?></td>        
+                                                                <td><?php echo ucfirst($val['name']);?></td>
+                                                                <td><?php echo ucfirst($val['mobile']);?></td>
+                                                                <td><?php echo ucfirst($val['whatsapp']);?></td>                                                            
+                                                                <td><?php echo ucfirst($val['polling_both']);?></td>
+                                                                <td><?php echo ucfirst($val['availiability']);?></td>
+                                                                <td><?php echo ucfirst($val['offline_sink_datetime']);?></td>
+                                                                <td><a class="iframe" id="showfarmerpopups" style="background-color: #4d5b76;border: 1px solid; color: #fff;display: block;font-size: 9px;font-weight: bold;padding: 2px;float: left;" href="/user/location/data/<?php echo $val['id'];?>">View Location</a></td>
+                                                                <td><a href="/user/view-detail/data/<?php echo md5($val['id']);?>" class="iframe" id="view-details" title="View Details" style="background-color: #4d5b76;border: 1px solid; color: #fff;display: block;font-size: 9px;font-weight: bold;padding: 2px;float: left">view</a></td>
+ 
+                                                            </tr>
+                                        <?php  $i++;} } else { ?>   
+                                                            <tr><td colspan="15">Result not found.</td></tr>
+                                      <?php } ?>  
+	  
+	                         </table>
+                              </div>
+                           </div>
+                       </fieldset>
+                    </form>
+                </div>
+                <div id="confirmCall">
+                   <form>
+                       <fieldset>
+                            <div class="well" style="overflow:scroll; height:auto;">
+                               <div class="CSSTableGenerator" >
+                                   <table border="1">
+                                      <tr>
+                                            <td>S.No.</td>
+                                            <td>Place Description</td>
+                                            <td>Concerned Person </td>
+                                            <td>Designation</td>
+                                            <td>Contact</td>
+                                            <td>Address</td>
+                                            <td>Date</td>        
+                                       </tr>
+    
+       
+                                        <?php  if($getPlacedInformation){
+                                                    $i=1;             
+                                                    foreach($getPlacedInformation as $val1){
+                                         ?>
+                                                            <tr>
+                                                                <td><?php echo $i; ?></td>        
+                                                                <td><?php echo ucfirst($val1['place_description']);?></td>
+                                                                <td><?php echo ucfirst($val1['consenred_person']);?></td>
+                                                                <td><?php echo ucfirst($val1['designation']);?></td>
+                                                                <td><?php echo ucfirst($val1['contact']);?></td>   
+                                                                <td><?php echo ucfirst($val1['address']);?></td>
+                                                                <td><?php echo ucfirst($val1['offline_sink_datetime']);?></td>   
+                                                            </tr>
+                                        <?php  $i++;} } else { ?>   
+                                                            <tr><td colspan="15">Result not found.</td></tr>
+                                      <?php } ?>  
+	  
+	                         </table>
+                              </div>
+                           </div>
+                       </fieldset>
+                    </form>
+                </div>
+                
+        
+        
+      
+        
+        
+        
+        
+
+    </div>
+</div>
+
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
+

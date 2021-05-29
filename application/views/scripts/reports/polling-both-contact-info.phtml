@@ -1,0 +1,143 @@
+<?php 
+  $params = $this->params;
+  $record = $this->paginator; 
+  $totalrec = $this->totalrec;
+?>
+
+<!-- fancybox start here -->
+<script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript">
+	$(document).ready(function() {	
+				$("a#view-details").fancybox({
+				'transitionIn'	:	'elastic',
+				'transitionOut'	:	'elastic',
+				'width' : 800,
+				'height' : 500,
+				'speedIn'		:	600, 
+				'speedOut'		:	200, 
+				'overlayShow'	:	true
+				});	
+			});
+			
+			$(document).ready(function() {	
+					$("a#showfarmerpopups").fancybox({
+					'width' : "80%",
+					'height' : "80%",
+					'speedIn'		:	600, 
+					'speedOut'		:	200, 
+					'overlayShow'	:	true
+					});	
+				});	
+
+
+					
+</script>
+<script>
+    $(document).ready(function() {
+      $('.breadcrumb').css({'width':(($(window).width())-270)+'px'});
+      $(window).resize(function(){
+           $('.breadcrumb').css({'width':(($(window).width())-270)+'px'}); 
+      });
+    });
+
+    function getSearch(polling_both){
+        document.search.action="/reports/polling-both-contact-info/polling_both/"+polling_both;  
+        document.search.submit();  
+    }
+</script>
+<style>
+    .tableheading{
+        background-color: #e2e2e2;
+        color: #000;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #cfcccc;
+    }
+    .txt_center{
+       text-align:center !important;
+    }
+    .imop{
+        margin:0px !important;
+    }
+</style> 
+
+<div class="content">
+    <div class="header">
+        <h1 class="page-title">Reports </h1>
+    </div>
+    <div class="breadcrumb">
+        <div style="position:relative;">
+            <ul class="imop">
+                <li><a href="/dashboard">Home</a> <span class="divider">/</span>
+                </li>
+                <li><a href="/dashboard">Reports</a> <span class="divider">/</span>
+                </li>
+                <li class="active">View Contact Information</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="padding-top:162px;">
+
+        <!--- user filtor by role end -->
+
+        <div class="row-fluid" style="margin-top:10px;">
+
+            <div class="search-well">
+                <div class="form-inline">
+                    <form class="form-inline" style="width:1000px; float: left;" name="search" method="post" style="margin-bottom:10px;">
+                        <input type="text" name="polling_both" id="polling_both" placeholder="Search By polling Both..." value="<?php if($params['polling_both']){ echo $params['polling_both'];  }?>" class="input-large">                        
+                        <button type="button" onclick="getSearch(this.form.polling_both.value)" class="btn" id="searchbtn" style="position:relative; text-align:center; padding-left:22px;"><span class="search"></span> Go</button>
+                    </form>
+                    <div style="  display:block; width:15%; padding:11px; "></div>
+                </div>
+            </div>
+
+            <a href="/reports/polling-both-contact-info/type/generate_contact/polling_both/<?php  echo $params['polling_both']; ?>" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Export In Excel</a>
+            <div class="well" style="overflow:scroll; height:auto;">
+
+                <table class="table tablesorter">
+                    <thead>
+
+                        <tr>
+                            <td colspan="13" class="tableheading">Contatct Information List</td>
+                        </tr>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Name</th>
+                            <th>Mobile No</th>
+                            <th>Designation</th>
+                            <th>Polling Both Id</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($totalrec){ $i=1; foreach($record as $key=>$val){ ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo ucfirst($val[ 'name']);?></td>
+                            <td><?php echo ucfirst($val[ 'mobile']);?></td>
+                            <td><?php echo ucfirst($val[ 'designation']);?></td>
+                            <td><?php echo ucfirst($val[ 'polling_both']);?></td>
+                            <td><?php echo ucfirst($val[ 'offline_sink_datetime']);?></td>
+                        </tr>    
+                            <?php $i++; } } else { ?>
+                            <tr>
+                                <td colspan="8">Result not found.</td>
+                            </tr>
+                            <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Pagingnation Start-->
+            <?php if($totalrec> $this->perPage) { echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); } ?>
+        </div>
+    </div>
+</div> 
+    
+   

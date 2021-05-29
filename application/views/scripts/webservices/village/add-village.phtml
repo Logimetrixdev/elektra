@@ -1,0 +1,278 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+$params = $this->params;
+$circleList = $this->circleList;
+
+?>
+
+
+
+
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+                
+                
+  
+
+$( "#circle_id" ).change(function(e) {  
+$.get( "/tehsil/get-alldistrict-by-circle", { circle_id: $( "#circle_id" ).val() }, "json" )
+.done(function( data ) {
+  select = document.getElementById('district_id');
+    select.options.length = 0;
+    options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) { 
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }	
+});
+});
+
+
+$( "#district_id" ).change(function(e) {   
+$.get( "/region/get-alltehsil-by-district", { district_id: $( "#district_id" ).val() }, "json" )
+.done(function( data ) {
+  select = document.getElementById('tehsil_id');
+  select.options.length = 0;
+  options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) { 
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }	
+});
+});
+
+$( "#tehsil_id" ).change(function(e) {   
+$.get( "/village/get-allregion-by-tehsil", { tehsil_id: $( "#tehsil_id" ).val() }, "json" )
+.done(function( data ) {
+  select = document.getElementById('region_id');
+  select.options.length = 0;
+  options = data.options; // Or whatever source information you're working with
+    for (index = 0; index < options.length; ++index) { 
+      option = options[index];
+      select.options.add(new Option(option.text, option.value));
+    }	
+});
+});
+
+
+		
+});
+</script>
+<script>
+
+
+
+function validatedistrict()
+{  
+        if(document.getElementById("circle_id").value=="")
+	{
+	 alert("Please select state name.");
+	 document.getElementById("circle_id").focus();
+	 return false;
+	}
+	
+	if(document.getElementById("district_id").value=="")
+	{
+	 alert("Please select district name.");
+	 document.getElementById("district_id").focus();
+	 return false;
+	}
+        
+        if(document.getElementById("tehsil_id").value=="")
+	{
+	 alert("Please select tehsil name.");
+	 document.getElementById("tehsil_id").focus();
+	 return false;
+	}
+        
+        
+        if(document.getElementById("region_id").value=="")
+	{
+	 alert("Please select region name.");
+	 document.getElementById("region_id").focus();
+	 return false;
+	}
+        
+        if(document.getElementById("village_name").value=="")
+	{
+	 alert("Please enter village name");
+	 document.getElementById("village_name").focus();
+	 return false;
+	}
+        
+        
+        
+        
+         
+  return true;
+}
+          
+            
+</script>
+
+
+
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Add New Village </h1>
+        </div>
+        
+        <ul class="breadcrumb">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li >All Masters<span class="divider">/</span></li>
+                        <li class="active">Add Village<span class="divider">/</span></li>
+           
+        </ul>
+<?php if($this->successMessage) { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<?php echo $this->successMessage;?>
+		</div>	
+		<?php } ?>
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+	<div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+  margin-right: 10px;
+  -webkit-border-radius: 10px!important;">
+             
+      
+       <form id="myform" method="post" name="addvillageform" action="/village/add-village"  onsubmit="return validatedistrict();"  >
+            <fieldset>
+            <legend>Village Details</legend>
+              <div class="frmRow" style="float: left; width: 100%;">
+            	<div class="frmColLeft" style="width:170px !important;">State Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                   <select name="circle_id" id="circle_id" style="width:222px !important;">
+                         <option value="">--Select State--</option>
+                         <?php
+                         foreach($this->AllState as $key){
+                         ?>
+                          <option value="<?php echo $key['id']?>" ><?php echo $key['state']?> [<?php echo $key['Circle']?>]</option>  
+                         <?php
+                         }
+                         ?>
+                         
+                     </select>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            <div class="frmRow" style="float: left; width: 100%;">
+            	<div class="frmColLeft" style="width:170px !important;">District Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                   <select name="district_id" id="district_id" style="width:222px !important;">
+                         <option value="">--Select District--</option>
+                        
+                         
+                     </select>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+            <div class="frmRow" style="float: left; width: 100%;">
+            	<div class="frmColLeft" style="width:170px !important;">Tehsil Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                   <select name="tehsil_id" id="tehsil_id" style="width:222px !important;">
+                         <option value="">--Select Tehsil--</option>
+                        
+                         
+                     </select>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+           
+            
+                 <div class="frmRow" style="float: left; width: 100%;">
+            	<div class="frmColLeft" style="width:170px !important;">Region Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                   <select name="region_id" id="region_id" style="width:222px !important;">
+                         <option value="">--Select Region--</option>
+                        
+                         
+                     </select>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+       
+            
+             <div class="frmRow" style="float: left; width: 100%;">
+            	<div class="frmColLeft" style="width:170px !important;">Village Name:</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;"> 
+                     <input type="text" value="" name="village_name" id="village_name" placeholder="Village Name...."> 
+                  </div>
+                </div>
+            	</div>
+                
+		 		 <div class="clear"></div>
+            </div>
+              <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Area Pin Code:</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;"> 
+                     <input type="text" value="" name="pincode" id="pincode" placeholder="Pin Code...."> 
+                  </div>
+                </div>
+            	</div>
+                
+		 		 <div class="clear"></div>
+            </div>
+            
+            </fieldset>
+           
+           
+          
+              <div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+              <button type="button" class="btn btn-primary" value="Cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary" value="Save">Add Village Info</button>
+              </div>
+        </form>
+</div>
+    </div>
+
+
+

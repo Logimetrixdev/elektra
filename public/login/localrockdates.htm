@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>localrockdates</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<script language="Javascript" type="text/javascript">
+Zend = {
+	MVC: {
+		module: "default",
+		controller: "admin",
+		action: "index",
+		params: {"controller":"admin","action":"index","module":"default"}	}
+}
+
+config = {
+	server: {
+		apphost: "www.localrockdates.com",
+		statichost: "www.rockdates.w3studioz.com",
+		imagehost: "www.rockdates.w3studioz.com"
+	}
+}
+</script>
+<link rel="shortcut icon" href="http://www.rockdates.w3studioz.com/favicon.ico">
+<script type="text/javascript" src="localrockdates_files/jquery.js"></script><script type="text/javascript">
+
+var reg=jQuery.noConflict();
+
+reg(document).ready(function() {
+ 
+ // validate signup form on keyup and submit
+ reg("#loginform").validate({
+  rules: {
+	username:"required",
+	password:"required"
+  },
+ });
+});
+</script><style type="text/css">
+input.error {
+    border: 1px solid red !important;
+}
+#content {width:938px;}
+#login {width:300px;margin:0 auto;padding:20px;background:#f6f6f6;border:1px solid #ccc; -webkit-box-shadow: #fff 0px 4px 15px;
+	        -moz-box-shadow: #fff 0px 4px 15px; box-shadow: #fff 0px 4px 15px; behavior: url(css/PIE.htc);}
+.btn,.input {margin:8px;}
+</style><link rel="stylesheet" type="text/css" href="localrockdates_files/layout.css"></head>
+	<!-- Content -->
+	
+
+
+
+
+<body><div id="header">
+  <div class="topBannerwrapper">  
+    <div class="logo_inner"><a href="http://www.localrockdates.com/admin" class="logo"></a></div>
+	  </div>
+</div> <div id="container" class="round10" style="min-height:400px;">
+
+
+      <div id="content" class="left" style="min-height:400px;">
+         <h1>Administrator Login</h1>
+         <p>
+            Please use the below form to login to administrator panel.
+         </p>
+
+         <br><br>
+         <div class="round10" id="login">
+            <form name="loginfrm" id="" action="/admin/adminpannel" method="POST">
+            <table align="center" cellpadding="5" cellspacing="0" width="400">
+			               <tbody><tr>
+                  <td align="label">Username:</td>
+                  <td align="textbox"><input name="username" id="username" class="input3 round5" style="width:200px;" type="text"></td>
+               </tr>
+			                  <tr>
+                  <td align="label">Password:</td>
+                  <td align="textbox"><input name="password" id="password" class="input3 round5" style="width:200px;" type="password"></td>
+               </tr>
+			                  <tr>
+                  <td align="left">&nbsp;</td>
+                  <td align="left"><input name="button" id="button" value="Login" class="btn" type="submit"></td>
+               </tr>
+            </tbody></table>
+            </form>
+         </div>
+      </div>
+      <div class="clear">&nbsp;</div>
+      
+   </div>
+<!--START_FOOTER-->
+
+<!--END_FOOTER-->	<!-- Content -->
+</body></html>

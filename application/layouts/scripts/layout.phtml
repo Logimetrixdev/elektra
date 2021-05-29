@@ -1,0 +1,108 @@
+<?php 
+$front =  Zend_Controller_Front::getInstance();
+$role = $front->getRequest()->getParam('role');
+
+$controller = $front->getRequest()->getControllerName(); 
+$action = $front->getRequest()->getActionName(); 
+$staffCode = $front->getRequest()->getParam('staffCode');
+$staffUser = $front->getRequest()->getParam('staffUser');
+$selecetduser = $staffCode?$staffCode:$staffUser;
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <?php
+        echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+        if($controller =='care'){	
+            echo $this->headTitle('Care Rating');
+        }
+        else{
+            echo $this->headTitle('Elektra Solutions');
+        }
+    ?>
+    <?php echo $this->headLink()->prependStylesheet('/css/bootstrap.css')->appendStylesheet('/css/theme.css')->appendStylesheet('/lib/font-awesome/css/font-awesome.css'); ?>    
+    <?php echo $this->headScript()->prependFile('/js/jquery-1.7.2.min.js')->appendFile('/js/bootstrap.js'); ?>
+    <style type="text/css">
+        .brand { font-family: georgia, serif; }
+        .brand .first {
+            color: #ccc;
+            font-style: italic;
+        }
+        .brand .second {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+   <link rel="stylesheet" type="text/css" href="/css/sweetalert/dist/sweetalert.css">
+	<script>
+	function getFiltorUsingAjax(role){
+		if(role == 'selectRoleHere'){
+			alert('Please select any Role');
+			return false;
+		}
+		else{
+			$.ajax({
+				  url: "/ajaxrequest/get-user-by-role/rolename/"+role,
+				  cache: false
+				})
+				  .done(function( myJSONObject ) { 
+				 
+				  var obj = eval ("(" +  myJSONObject  + ")");
+				  var user_data = obj.user_data;
+				  var len = user_data.length;
+				  var userList = '<option value="">Select User</option>';
+				  if(len)
+				  {
+					  for(var i=0;i<len;i++)
+					  {
+						var staffName = user_data[i].StaffName;
+						var StaffCode = user_data[i].StaffCode;
+						var user_staff_code = user_data[i].user_staff_code;
+						var user_detail = staffName+'   '+'('+"StaffCode : "+user_staff_code+')';
+						var urlrole = '<?php echo $selecetduser;?>';   
+						
+						if(StaffCode == urlrole)
+						{
+							userList += '<option value="'+StaffCode+'" selected="selected">'+user_detail+'</option>';
+						}
+						else
+						{
+							userList += '<option value="'+StaffCode+'">'+user_detail+'</option>';
+						}
+					  }
+				  }
+					$("#selectUserList").html(userList);	
+					
+				  }).fail(function( jqXHR, textStatus ) {
+				 // alert( "Request failed: " + textStatus );
+				  });
+		}
+	}
+	</script>
+	
+  </head>
+
+  <body class=""> 
+  <!--<![endif]-->
+	
+  <?php
+     echo $this->render('header.phtml');  
+	 echo $this->layout()->content;
+   	 echo $this->render('footer.phtml');  
+  ?>
+
+<script type="text/javascript">
+	$("[rel=tooltip]").tooltip();
+	$(function() {
+		$('.demo-cancel-click').click(function(){return false;});
+	});
+</script>
+    <script src="/css/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="/css/sweetalert/dist/jquery.sweet-alert.init.js"></script>
+ </body>
+</html>

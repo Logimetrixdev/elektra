@@ -1,0 +1,98 @@
+<?php
+	$params = $this->params;
+	$viewLocation = $this->viewLocation;
+
+	//echo '<pre>';
+	//print_r($viewLocation);
+	//echo '</pre>';
+	//exit();
+	
+	    
+?>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <meta http-equiv="refresh" content="60" > 
+  <title>Google Maps Multiple Markers</title> 
+  <style>
+  .select-menu-map, #selectRoleHere {
+	width:200px;
+	border:1px solid #abadb3;
+	padding:4px;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+.reset-button{
+	cursor:pointer;
+	line-height:20px;
+	padding:3px 12px;
+	color:#fff;
+	background: #4D5B76;
+}
+
+input:focus{
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+}
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67PS69UkNREHH5pkb1E-zCy7iWKSNgE4&libraries=geometry"></script>
+    <?php
+     echo $this->headScript()->prependFile('/js/jquery-1.7.2.min.js')
+                                               ->appendFile('/js/bootstrap.js');
+    ?>
+	
+
+
+	
+</head> 
+<body>
+
+
+<div>
+<!--- user filtor by role --->
+
+
+<div id="map" style="width: 100%; height: 100%;"></div>
+.
+  <script type="text/javascript">
+    var locations = [
+	
+      ['Name : <strong><?php echo $viewLocation['consenred_person'];?></strong><br/>Mobile No: <strong><?php echo $viewLocation['contact'];?>', <?php echo $viewLocation['lat'];?>, <?php echo $viewLocation['long'];?>, 4],
+             
+    ];
+	// Enable the visual refresh
+	google.maps.visualRefresh = true;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 18,
+      center: new google.maps.LatLng(<?php echo $viewLocation['lat'];?>, <?php echo $viewLocation['long'];?>),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+  
+
+    var marker, i;
+	
+    for (i = 0; i < locations.length; i++) { 
+		//alert(locations[i][1]);
+        //alert(locations[i][2]); 
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+   
+        map: map
+         
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+  </div>
+</body>
+</html>

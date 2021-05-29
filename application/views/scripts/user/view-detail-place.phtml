@@ -1,0 +1,140 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+$params = $this->params;
+$getLoginUserInformationByID = $this->getLoginUserInformationByID;
+
+
+?>
+
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
+
+<script type="text/javascript">
+function goback() {
+    history.go(-1);
+}
+</script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.css" />
+
+        
+        <ul class="breadcrumb" style="margin-top:48px;">
+            <li><a onclick="parent.location.href='/dashboard' " style="cursor:pointer;">Home</a> <span class="divider">/</span></li>
+            <li class="active">Contact Information Detail</li>
+            <a class="btn btn-primary" onclick="printContent('mydiv')" href="javascript:void(0)" style="float:right; margin-right:37px;">Print</a>
+
+        </ul>
+
+        <div class="container-fluid" style="padding-top: 112px !important;">
+            <div class="row-fluid">
+			
+<div class="well" style="overflow:auto;" id="mydiv">
+    <table class="table tablesorter">
+      <thead>
+	<tr>
+            <th colspan="4" style="text-align: center; font-size: 14px;"><b>Contact Information Detail</b></th> 
+	 </tr>
+        <tr>
+          <th>Place Description</th>
+          <th>Concerned Person</th>
+          <th>Designation</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $getLoginUserInformationByID['place_description'];?></td>
+	  <td><?php echo $getLoginUserInformationByID['consenred_person'];?></td>
+          <td><?php echo $getLoginUserInformationByID['designation'];?></td>    
+          <td><?php echo $getLoginUserInformationByID['contact'];?></td>    
+        </tr>
+	
+
+      </tbody>
+       <thead>
+       <tr>
+          <th>Address</th>
+          <th>Date</th>
+          <th>Photo</th>
+           <th>Under</th>
+     
+        </tr>
+      </thead>
+       <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $getLoginUserInformationByID['address'];?></td>
+	  <td><?php echo $getLoginUserInformationByID['offline_sink_datetime'];?></td>
+          <td><?php  if($getLoginUserInformationByID['photo']){ ?> <img src="/<?php  echo $getLoginUserInformationByID['photo']; ?>" style=" width:80px; height:80px;"/> <?php }  else {  echo 'Image Not Available';} ?> </td>
+          <td><?php  if($this->parent_user['StaffName']){ echo $this->parent_user['StaffName']; } ?></td>
+        </tr>
+	
+
+      </tbody>
+      
+        <thead>
+       <tr>
+        
+          
+        </tr>
+      </thead>
+       <tbody>
+       
+	  
+        <tr>
+      
+	
+        
+          
+             
+        </tr>
+	
+
+      </tbody>
+      <thead>
+       <tr>
+  
+         
+      
+        </tr>
+      </thead>
+      
+      
+      
+       <tbody>
+       
+    
+        <tr>
+          
+      <td></td>
+            <td></td>
+        
+           <td></td>
+            <td></td>
+             
+        </tr>
+  
+
+      </tbody>
+    </table>
+    
+  
+</div>
+ 
+	</div>
+</div>
+
+    
+   

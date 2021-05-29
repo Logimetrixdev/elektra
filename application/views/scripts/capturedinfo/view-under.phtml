@@ -1,0 +1,70 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+$params = $this->params;
+$getUnderData = $this->getUnderData;
+// echo '<pre>';
+// print_r($getUnderData);exit;
+
+?>
+<script type="text/javascript">
+  function goback() {
+    history.go(-1);
+  }
+</script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.css" />
+<ul class="breadcrumb" style="margin-top:48px;">
+  <li><a onclick="parent.location.href='/dashboard' " style="cursor:pointer;">Home</a> <span class="divider">/</span></li>
+  <li class="active">Contact Information Detail</li>
+
+</ul>
+<div class="container-fluid" style="padding-top: 112px !important;">
+  <div class="row-fluid">
+    <div class="well" style="overflow:auto;" id="mydiv">
+      <table class="table tablesorter">
+        <thead>
+         <tr>
+          <th colspan="12" style="text-align: center; font-size: 14px;"><b></b>Under Field User Detail</th> 
+        </tr>
+        <tr>
+         <th>S.No.</th>
+         <th>Name</th>
+         <th>Identity</th>
+         <th>Mobile</th>
+         <th>Whatsapp No</th>
+         <th>Polling Both Id</th>  
+         <th>Availability</th>                                           
+         <th>Date</th>
+
+       </tr>
+     </thead>
+     <tbody>
+      <?php
+      if($i == 0){
+        foreach ($getUnderData as $getLoginUserInformationByID) {
+          // print_r($getLoginUserInformationByID);exit();
+          ?>
+          <tr>
+            <td><?php echo $i+1; ?></td>
+            <td><?php echo $getLoginUserInformationByID['name'];?></td>
+            <td><?php echo $getLoginUserInformationByID['under'];?></td>
+            <td><?php echo $getLoginUserInformationByID['mobile'];?></td>    
+            <td><?php echo $getLoginUserInformationByID['whatsapp'];?></td>   
+            <td><?php echo $getLoginUserInformationByID['polling_both'];?></td>
+            <td><?php echo $getLoginUserInformationByID['availiability'];?></td>
+            <td><?php echo $getLoginUserInformationByID['offline_sink_datetime'];?></td>    
+          </tr>
+          <?php  $i++; } } else { ?>  
+          <tr><td colspan="8">Result not found.</td></tr>
+          <?php } ?>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

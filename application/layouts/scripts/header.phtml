@@ -1,0 +1,118 @@
+<?php 
+    $auth = Zend_Auth::getInstance();
+    $authStorage = $auth->getStorage();
+    //echo "<pre>"; print_r($authStorage->read()); die;
+    $role = $authStorage->read()->Role;
+    $WebLoginID = $authStorage->read()->WebLoginID;
+    $newWebLoginID = md5($WebLoginID.'@@@@@'.$role);
+    if($role=="super_admin"){
+       $lastLogin = date('Y-m-d h:i:s',strtotime('+330 minutes'));
+       $username = ucfirst($authStorage->read()->username);
+       $manageusers_url = "/nationalhead/manage-national-head";
+       $change_password_url = "/admin/change-password";
+    }
+    else if($role=="service_manager"){
+        $lastLogin = $this->last_login;
+        $username = ucfirst($authStorage->read()->StaffName);
+        $manageusers_url = "/user/manage-user";
+        $change_password_url = "/index/change-password";
+    }
+
+    $front = Zend_Controller_Front::getInstance();
+    $controller = $front->getRequest()->getControllerName(); 
+    $action = $front->getRequest()->getActionName(); 
+?>
+<?php if(empty($authStorage->read()->id) && empty($authStorage->read()->Role)) { ?>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <ul class="nav pull-right"></ul>
+                    <?php  if($controller =='care'){ ?>
+                                <img src="/uploads/care.png" alt="logo" style="height:56px; width:180px; margin:5px;">
+                    <?php  }
+                           else{  ?>
+                                <img src="/images/Elektra solutions logo2.png" alt="logo" style="height:44px; margin:5px;">
+                    <?php  } ?>    
+                </div>
+            </div>
+<?php } 
+      else{ ?>
+            <div id="header" class="navbar">
+                  <div class="navbar-inner">
+                          <ul class="nav pull-right">
+                            <li><a href="javascript:void(0);" class="hidden-phone visible-tablet visible-desktop" role="button">Last Login : <?php echo date('Y-m-d h:i:s',strtotime('+330 minutes'));?></a></li>
+                            <li><a href="javascript:void(0);" class="hidden-phone visible-tablet visible-desktop" role="button">|</a></li>
+                            <li id="fat-menu" class="dropdown">
+                              <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                  <i class="icon-user"></i> <?php echo $username; ?>
+                                  <i class="icon-caret-down"></i>
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a tabindex="-1" href="/dashboard">My Account</a></li>
+                                  <li class="divider visible-phone"></li>
+                                  <?php if($controller =='care'){ ?>
+                                            <li><a tabindex="-1" href="/care/logout">Logout</a></li>
+                                  <?php }else{  ?>
+                                            <li><a tabindex="-1" href="/authlogout/logout">Logout</a></li>
+                                  <?php } ?>  
+                              </ul>
+                            </li>
+
+                          </ul>
+                          <?php  if($controller =='care'){ ?>
+                          <img src="/uploads/care.png" alt="logo" style="height:56px; width:180px; margin:5px;">
+                      <?php  }else{  ?>
+                          <img src="/images/Elektra solutions logo2.png" alt="logo" style="height:44px; margin:5px;">
+                      <?php  } ?>  
+                  </div>
+              </div>
+<!--Top Navbar Section End-->
+
+<!--Left  Menu Section Start-->
+<?php  if($controller =='care'){ ?>
+            <div class="sidebar-nav" style="margin-top:17px;">
+                <a href="/care/dashboard" <?php if($controller=="care" && $action=="dashboard") { ?> class="nav-header selected" <?php } else { ?>  class="nav-header" <?php } ?>><i class="icon-question-sign-left5"></i>Dashboard</a>
+                <!--<a href="/care/user" <?php if(($controller=="care") && ($action=="manage-user")|| ($action=="manage-user")) { ?> class="nav-header selected" <?php } else { ?>  class="nav-header" <?php } ?>><i class="icon-question-sign-left"></i>Manage Users</a>-->
+                <a href="#error-menu3" data-toggle="collapse"  <?php if(($controller=="care" && ($action=="view-contact" || $action=="view-place") )) { ?> class="nav-header selected" <?php } else { ?>  class="nav-header collapsed" <?php } ?>><i class="icon-question-sign-left1"></i>View Captured Information <i class="icon-chevron-up"></i></a>	
+                <ul id="error-menu3" <?php if(($controller=="care")){ ?> class="nav nav-list in collapse" <?php } else { ?>  class="nav nav-list collapse" <?php } ?>>
+                   <li <?php if($controller=="care" && ($action=="view-contact") ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/care/view-contact">Contact Information </a></li>
+                   <li <?php if($controller=="care" && ( $action=="view-place" ) ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/care/view-place">Place Information</a></li>
+                </ul>  
+                <!--  <a href="/care/track" class="nav-header"><i class="icon-question-sign-left1"></i>Track User</a> -->
+            </div>
+<!--Left  Menu Section End-->
+<?php  }else{ ?>
+
+            <div class="sidebar-nav">    
+                <a href="/dashboard" <?php if($controller=="dashboard" && $action=="index") { ?> class="nav-header selected" <?php } else { ?>  class="nav-header" <?php } ?>><i class="icon-question-sign-left5"></i>Dashboard</a>
+                <a href="<?php echo $manageusers_url; ?>" <?php if(($controller=="user") && ($action=="manage-user")) { ?> class="nav-header selected" <?php } else { ?>  class="nav-header" <?php } ?>><i class="icon-question-sign-left"></i>Manage Users</a>
+                <a href="#error-menu3" data-toggle="collapse" <?php if(($controller=="capturedinfo")){ ?> class="nav-header selected" <?php } else { ?>  class="nav-header collapsed" <?php } ?>><i class="icon-question-sign-left1"></i>View Captured Information <i class="icon-chevron-up"></i></a>	
+                <ul id="error-menu3"<?php if(($controller=="capturedinfo")){ ?> class="nav nav-list in collapse" <?php } else { ?>  class="nav nav-list collapse" <?php } ?>>
+                    <li <?php if($controller=="capturedinfo" && ($action=="view-contact") ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/capturedinfo/view-contact">Contact Information </a></li>
+                    <li <?php if($controller=="capturedinfo" && ( $action=="view-place" ) ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/capturedinfo/view-place">Place Information</a></li>
+               </ul>
+
+
+              <a href="#error-menu4" data-toggle="collapse" <?php if(($controller=="addinformation")){ ?> class="nav-header selected" <?php } else { ?>  class="nav-header collapsed" <?php } ?>><i class="icon-question-sign-left1"></i>Add Information <i class="icon-chevron-up"></i></a>  
+                <ul id="error-menu4"<?php if(($controller=="addinformation")){ ?> class="nav nav-list in collapse" <?php } else { ?>  class="nav nav-list collapse" <?php } ?>>
+                    <li <?php if($controller=="addinformation" && ($action=="add-contact-information") ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/addinformation/add-contact-information">Add Contact Information </a></li>
+                    <li <?php if($controller=="addinformation" && ( $action=="add-place-information" ) ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/addinformation/add-place-information">Add Place Information</a></li>
+               </ul>
+
+
+              <a href="#error-menu5" data-toggle="collapse" <?php if(($controller=="felogindetail" || $controller=="reports")){ ?> class="nav-header selected" <?php } else { ?>  class="nav-header collapsed" <?php } ?>><i class="icon-question-sign-left1"></i>Reports <i class="icon-chevron-up"></i></a>  
+                <ul id="error-menu5"<?php if(($controller=="felogindetail" || $controller=="reports")){ ?> class="nav nav-list in collapse" <?php } else { ?>  class="nav nav-list collapse" <?php } ?>>
+                    <li <?php if($controller=="felogindetail" && ($action=="login-detail") ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/felogindetail/login-detail">User Login Report </a></li>
+                    
+                    <li <?php if($controller=="reports" && ($action=="polling-both-contact-info") ) { ?> class="selected" <?php }  else { ?>  class="" <?php } ?>><a href="/reports/polling-both-contact-info">Polling Both Contact Information</a></li>
+
+               </ul> 
+
+               <a href="/gmap/track" class="nav-header"><i class="icon-question-sign-left1"></i>Track User</a> 
+               <a href="<?php echo $change_password_url; ?>" <?php if(($controller=="admin" || $controller=="index") && $action=="change-password") { ?> class="nav-header selected" <?php } else { ?>  class="nav-header" <?php } ?>><i class="icon-question-sign-left4"></i>Change Password</a>   
+            </div>
+
+<?php   } 
+} 
+?> 
+   
+	

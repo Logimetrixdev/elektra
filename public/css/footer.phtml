@@ -1,0 +1,10 @@
+<?php 
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+if($authStorage->read()->id) { 
+?>
+<footer>
+<div classs="footertxt">&copy; 2013 ACME
+</div>
+</footer>
+<?php } ?>

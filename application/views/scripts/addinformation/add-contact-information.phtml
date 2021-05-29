@@ -1,0 +1,255 @@
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+<script>
+function hideBox(value){
+
+   if(value =="no")
+    document.getElementById("block").style.display = "none";
+    //document.getElementById("party_name").value = "";
+   else
+    document.getElementById("block").style.display = "block";
+}
+
+
+
+function validateUser(){  
+  if(document.getElementById("name").value==""){
+     alert("Please enter  name.");
+     document.getElementById("name").focus();
+     return false;
+  }  
+
+
+  // if(document.getElementById("mobile").value==""){
+  //    alert("Please enter  mobile no.");
+  //    document.getElementById("name").focus();
+  //    return false;
+  // }       
+  return true;
+}
+</script>
+
+
+
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Add Information </h1>
+        </div>
+        
+        <ul class="breadcrumb">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li class="active">Add Information<span class="divider">/</span></li>
+      <li class="active">Add Contact Information<span class="divider">/</span></li>
+           
+        </ul>
+<?php if($this->successMessage) { ?>
+		<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<?php echo $this->successMessage;?>
+		</div>	
+		<?php } ?>
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+	<div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+  margin-right: 10px;
+  -webkit-border-radius: 10px!important;">
+             
+     
+
+       <form id="myform" method="post" name="fielduserform" action="/addinformation/add-contact-information" enctype='multipart/form-data' onsubmit="return validateUser();">
+            <fieldset>
+            <legend>Contact Information</legend>
+              <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Name * :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="name" id="name" placeholder="Enter Name"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Mobile No :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="mobile" id="mobile" placeholder="Enter Mobile"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">What's App No :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="whatsapp" id="whatsapp" placeholder="Enter Whats app No"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+
+            <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Designation :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="designation" id="designation" placeholder="Enter Designation"> 
+                  </div>
+                </div>
+              </div>
+                
+         <div class="clear"></div>
+            </div>
+            <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Profession :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="text" value="" name="profession" id="profession" placeholder="Enter Profession"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+             <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Cast :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                    <input type="text" value="" name="cast" id="cast" placeholder="Enter Cast"> 
+                  </div>
+                </div>
+              </div>
+                
+         <div class="clear"></div>
+            </div>
+               <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Address :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <textarea name="address" placeholder="Enter Address"></textarea>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+           
+             <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Polling Both :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                    <input type="text" value="" name="polling_both" id="both" placeholder="Enter Polling Both"> 
+                  </div>
+                </div>
+              </div>
+                
+         <div class="clear"></div>
+            </div>
+         
+             <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Party Affiliation :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="radio" value="yes" name="Affiliation" checked=""  onclick="hideBox(this.value)">Yes
+                     <input type="radio" value="no" name="Affiliation" onclick="hideBox(this.value)"> No
+                </div>
+            	</div>
+            </div>    
+				 <div class="clear"></div>
+            </div>
+
+            <div class="frmRow" style="float: left; width: 50%;" id="block" style="display:block;">
+              <div class="frmColLeft" style="width:170px !important;">Party Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                    <input type="text" value="" name="party_name" id="party_name" placeholder="Enter Party Name"> 
+                  </div>
+                </div>
+              </div>
+                
+         <div class="clear"></div>
+            </div>
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Availiability :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="radio" value="pro" name="availiability" checked="">Pro
+                     <input type="radio" value="against" name="availiability"> Against
+                      <input type="radio" value="netural" name="availiability"> Neutral
+                </div>
+              </div>
+                
+            </div>
+            </div>
+
+            <br clear="all">
+            <div class="frmRow" style="float: left; width: 50%;">
+              <div class="frmColLeft" style="width:170px !important;">Image :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+              <div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <input type="file" value="" name="photograph_ci" id="photograph_ci" placeholder="Choose Photo"> 
+                </div>
+              </div>
+            </div>    
+        <div class="clear"></div>
+            </div>
+
+                  
+            </fieldset>
+
+
+              <div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+                    <button type="submit" class="btn btn-primary" value="Save">Add Contact Info</button>
+              </div>
+          </div>
+      
+         
+        </form>
+</div>
+
+    </div>
+
+
+

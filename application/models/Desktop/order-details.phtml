@@ -1,0 +1,107 @@
+<?php $orderDetails = $this->order; ?>
+<script type="text/javascript">
+function goback() {
+    history.go(-1);
+}
+</script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.css" />
+
+        
+	<div class="header" style="margin-top:0;">
+	    <h1 class="page-title">Order Details</h1>
+	</div>
+        
+        <ul class="breadcrumb" style="margin-top:48px;">
+            <li><a onclick="parent.location.href='/dashboard' " style="cursor:pointer;">Home</a> <span class="divider">/</span></li>
+            <li class="active">Order Details</li>
+        </ul>
+
+        <div class="container-fluid" style="padding-top: 112px !important;">
+            <div class="row-fluid">
+			
+<div class="well" style="overflow:auto;">
+      
+    <table class="table tablesorter">
+      <thead>
+	<tr>
+            <th colspan="5" style="text-align: center; font-size: 14px;"><b>Farmer Details</b></th> 
+	 </tr>
+        <tr>
+		  <th>Order No.</th>
+          <th>Farmer Name</th>
+          <th>Farmer Code</th>
+           <th>Allocated FE</th>
+         
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+       
+	  
+        <tr>
+			<td><?php echo $orderDetails['orderId'];?></td>  
+          <td><?php echo $orderDetails['FarmerName'];?></td>
+	  <td><?php echo $orderDetails['FarmerCode'];?></td>
+          <td><?php echo $orderDetails['allotedFieldEngg'];?> [<?php echo $orderDetails['allotedFieldEngg'];?>]</td> 
+ 
+        </tr>
+	
+
+      </tbody>
+     </table>
+    <table class="table tablesorter">
+      <thead>
+	<tr>
+            <th colspan="4" style="text-align: center; font-size: 14px;"><b>Chemical Details</b></th> 
+	 </tr>
+        <tr>
+          <th>Chemical Name</th>
+          <th>Chemical Type</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $orderDetails['chemical_name'];?></td>
+	  <td><?php echo $orderDetails['chemical_type'];?></td>
+          <td><?php echo $orderDetails['quantity'];?></td>    
+          <td><?php echo $orderDetails['rate_per_unit'];?></td>    
+           <td><?php echo $orderDetails['total_amount'];?></td>    
+        </tr>
+	
+
+      </tbody>
+       <thead>
+       <tr>
+          <th>Total Amount</th>
+          
+        </tr>
+      </thead>
+       <tbody>
+       
+	  
+        <tr>
+          <td><?php echo $orderDetails['total_amount'];?></td>
+ 
+        </tr>
+	
+
+      </tbody>
+
+  
+    </table>
+    
+  
+</div>
+ 
+	</div>
+</div>
+
+    
+   

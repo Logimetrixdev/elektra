@@ -1,0 +1,107 @@
+<?php
+      $params = $this->params;
+      $userList = $this->getAllUser;
+      $gettaskDetails = $this->gettaskDetails;
+     // print_r($gettaskDetails);
+       $rnk = $this->rnk;
+     
+      
+?>
+<head>
+
+<script>
+    $(function() {
+		$( "#task_date" ).datepicker({
+			showOn: "button",
+			buttonImage: "http://test.nddb.com/images/calendar.gif",
+			dateFormat: 'yy-mm-dd',
+			buttonImageOnly: true,
+			buttonText:'From date'
+		});       
+    });
+</script>
+
+
+  <section id="content">
+    
+         <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper" class=" grey lighten-3">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a>
+                  </li>
+                  <li><a href="#">My Space</a>
+                  </li>
+                  <li class="active">Edit Course</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        
+
+
+        <!--start container-->
+        <div class="container">
+         
+
+         
+        
+
+          <!--Form Advance-->          
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+                <h4 class="header2">Edit Course Detail</h4>
+                <div class="row">
+                  <form class="col s12" method="post" action="/course/edit-course" enctype="multipart/form-data">
+                      <input type="hidden" name="courseId" value="<?php echo $gettaskDetails['id']; ?>">
+                   
+                   
+                 <div class="row">
+                 
+
+                     <div class="input-field col s6">
+                          <input placeholder="Enter Institute Name" id="tname" type="text" name="course_name" value="<?php echo $gettaskDetails['course_name']; ?>" class="validate"/>
+                          <label for="institute_name">Course Name</label>
+                        </div> 
+                     <div class="input-field col s6">
+                          <input placeholder="No of Weeks" id="tname" type="text" name="duration" value="<?php echo $gettaskDetails['duration']; ?>" class="validate"/>
+                          <label for="institute_name">Duration</label>
+                        </div> 
+                      
+                      
+                    </div>
+                    
+               
+                   
+					  <div class="row">
+                     
+                    
+                      <div class="row">
+                        <div class="input-field col s12">
+                          
+                          <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Update Course Detail
+                            <i class="mdi-content-send right"></i>
+
+                          </button>
+</div>
+                        </div>
+                    
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </section>

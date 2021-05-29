@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.marketplace.envato.com	TRUE	/	FALSE	1999999999	referring_user	freshdesignweb
+.marketplace.envato.com	TRUE	/	FALSE	1999999999	clickthrough_id	567429161
+.themeforest.net	TRUE	/	FALSE	1999999999	referring_user	-1
+

@@ -1,0 +1,169 @@
+<?php 
+    $auth = Zend_Auth::getInstance();
+    $authStorage = $auth->getStorage();
+    //echo "<pre>"; print_r($authStorage->read()); die;
+    $role = $authStorage->read()->Role;
+    $getTotalCountCapturedInfoDetail = $this->getTotalCountCapturedInfoDetail;
+    $getTotalCountCapturedPlaceDetail = $this->getTotalCountCapturedPlaceDetail;
+?>
+
+<script src="amcharts/amcharts.js"></script>
+<script src="amcharts/pie.js"></script>
+<script src="amcharts/themes/light.js"></script>
+<script src="amcharts/serial.js" type="text/javascript"></script>
+
+<script>
+    var chart = AmCharts.makeChart( "chartdiv2", {
+        "theme": "light",
+	"type": "pie",
+	"angle": 27.9,
+	"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+	"depth3D": 15,
+	"labelText": "",
+	"startAngle": 82.8,
+	"colors": [
+            "#ADFF2F",
+            "#FFFF00",
+            "#FF9E01",
+            "#FCD202",
+            "#F8FF01",
+            "#B0DE09",
+            "#04D215",
+            "#0D8ECF",
+            "#0D52D1",
+            "#2A0CD0",
+            "#8A0CCF",
+            "#CD0D74",
+            "#754DEB",
+            "#DDDDDD",
+            "#999999",
+            "#333333",
+            "#000000",
+            "#57032A",
+            "#CA9726",
+            "#990000",
+            "#4B0C25"
+	],
+	"titleField": "category",
+	"valueField": "column-1",
+	"theme": "dark",
+	"allLabels": [],
+	"balloon": {},
+	"legend": {
+		"align": "center",
+		"markerType": "circle",
+		"valueText": ""
+	},
+	"titles": [
+                    {
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": "Captured Information Detail"
+                    }
+                ],
+	"dataProvider": [
+		{
+                    "category": "Contact detail",
+                    "column-1": "<?php  echo $getTotalCountCapturedInfoDetail['info_count'];?>" 
+		},
+		{
+                    "category": "Place Detail",
+                    "column-1": "<?php if($getTotalCountCapturedPlaceDetail['place_count']){ echo $getTotalCountCapturedPlaceDetail['place_count'];}else{ echo '0';}?>"
+		}
+	]
+    } );
+    jQuery( '.chart-input' ).off().on( 'input change', function(){
+    
+        var property = jQuery( this ).data( 'property' );
+        var target = chart;
+        var value = Number( this.value );
+        chart.startDuration = 0;
+
+        if ( property == 'innerRadius' ) {
+          value += "%";
+        }
+        target[ property ] = value;
+        chart.validateNow();
+    } );
+</script>
+
+<style>
+    #chartdiv {
+        width	: 100%;
+        height	: 250px;
+        font-size	: 11px;
+    }
+</style>
+
+<div class="content">
+    <div class="header">     
+       <h1 class="page-title">Dashboard</h1>
+    </div>
+    <div class="breadcrumb">
+        <div style="position:relative;">
+          <ul class="imop">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+            <li class="active">Dashboard</li>
+          </ul>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.breadcrumb').css({'width':(($(window).width())-270)+'px'});
+                $(window).resize(function(){
+               $('.breadcrumb').css({'width':(($(window).width())-270)+'px'}); 
+            });
+        });
+    </script> 
+
+    <script type="text/javascript">
+        $(function(){
+            var auto_refresh = setInterval(
+            function (){
+                var iframehtml = $("iframe#fancybox-frame").attr('src');
+                if(!iframehtml || iframehtml=='undefined'){
+                        location.reload();
+                }
+            }, 50000); 
+        });
+    </script>
+<!-- fancybox start here -->
+
+    <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {	
+            $("a#showfarmerpopups").fancybox({
+                'width' : "100%",
+                'height' : "100%",
+                'speedIn'		:	600, 
+                'speedOut'		:	200, 
+                'overlayShow'	        :	true
+            });	
+        });	
+    </script>
+
+    <div class="container-fluid">
+        <div style="margin-bottom:12px;">
+            <div class="row-fluid">
+                <div class="row-fluid"> 
+                    <!--Users Tab Start-->
+                    <div class="span12">
+                        <div class="block" id="acme_ls"><a href="javascript:void(0);" class="block-heading" style="cursor:default;">Dashboard Coming Soon !</a>
+                            <div class="block-body in collapse" id="page-stats" style="height: auto;">
+                                <div class="stat-widget-container">
+                                    <div class="stat-widget" >
+                                        <div id="chartdiv"  ></div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

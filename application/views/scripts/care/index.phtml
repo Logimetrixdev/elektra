@@ -1,0 +1,28 @@
+<style>
+li {list-style:none; color:#ed3237; font-size:13px;}
+ul{margin:0px; padding:0px;}
+</style>
+<?php $form = $this->form;?>
+       
+   <div class="row-fluid">
+    <div class="dialog">
+        <div class="block">
+            <p class="block-heading">Sign In</p>
+            <div class="block-body">
+              <p style="color:red;"><?php echo $this->errorMessage;?></p>
+               <form method="post" action="/care/index">
+                    <label>Login Id</label>
+                    <?php echo $form->loginid;?>
+                    <label>Password</label>
+                    <?php echo $form->password;?>
+                    <input name="submit" class="btn btn-primary pull-left" value="Login" type="submit">
+<!--					<p style="padding-left:10px; line-height:24px; display:inline;"><a href="/index/forgotpassword">Forgot your password</a></p>-->
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+       
+        <!-- <p><a href="/index/forgotpassword">Forgot your password?</a></p> -->
+		
+    </div>
+</div>

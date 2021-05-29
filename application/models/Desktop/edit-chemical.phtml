@@ -1,0 +1,197 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$authStorage = $auth->getStorage();
+$params = $this->params;
+$Record = $this->Record;
+
+?>
+
+
+
+
+<link rel="stylesheet" href="/css/datepicker/jquery.ui.all.css">
+
+<script src="/js/jquery-1.8.3.js"></script>
+
+<script type="text/javascript" src="/js/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+<script type="text/javascript" src="/lib2/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib2/bootstrap-datepicker.css" />
+
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
+
+<script>
+
+
+
+function validateState()
+{  
+        if(document.getElementById("stateID").value=="")
+	{
+	 alert("Please select state name.");
+	 document.getElementById("stateID").focus();
+	 return false;
+	}
+	
+	if(document.getElementById("unittype").value=="")
+	{
+	 alert("Please select unit type.");
+	 document.getElementById("unittype").focus();
+	 return false;
+	}
+        
+        if(document.getElementById("unit").value=="")
+	{
+	 alert("Please enter unit name");
+	 document.getElementById("unit").focus();
+	 return false;
+	}
+        if(document.getElementById("disp").value=="")
+	{
+	 alert("Please enter unit mobile display code.");
+	 document.getElementById("disp").focus();
+	 return false;
+	}
+         
+  return true;
+}
+
+
+
+            
+</script>
+
+
+
+<div class="content">
+        
+        <div class="header">
+            <h1 class="page-title">Edit Unit </h1>
+        </div>
+        
+        <ul class="breadcrumb">
+            <li><a href="/dashboard">Home</a> <span class="divider">/</span></li>
+			<li >All Masters<span class="divider">/</span></li>
+                        <li class="active">Edit Unit<span class="divider">/</span></li>
+           
+        </ul>
+     
+
+		
+		<?php if($this->errorMessage) { ?>
+		<div class="alert alert-error">
+			<button data-dismiss="alert" class="close" type="button">×</button>
+			<?php echo $this->errorMessage;?>
+		</div>
+	   <?php } ?>
+	<div class="well" style="padding:0 10px; width:auto;   margin-left: 10px;
+  margin-right: 10px;
+  -webkit-border-radius: 10px!important;">
+             
+      
+       <form id="myform" method="post" name="addUnitDetails" action="/unit/edit-unit"  onsubmit="return validateState();"  >
+            <input type="hidden" value="<?php echo $Record['id'];?>" name="unitId" id="stateId"> 
+            <fieldset>
+            <legend>Unit Details</legend>
+              <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">State Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <select name="stateID" style="width: 225px;" >
+                         <option value="">-- Select State --</option>
+                         <?php
+                         foreach($this->AllState as $k){
+                             ?>
+                         <option value="<?php echo $k['id']?>" <?php if($Record['stateId']==$k['id']) { echo "selected=''";}?> ><?php echo $k['state']?></option>
+                             <?php
+                         }
+                         ?>
+                     </select>
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Unit For :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;">
+                     <select name="unittype" id="unittype" style="width: 225px;">
+                         <option value="">-- Select Unit For --</option>
+                         <option value="l" <?php if($Record['unittype']=='l') { echo "selected=''";}?>>Land</option>
+                         <option value="s" <?php if($Record['unittype']=='s') { echo "selected=''";}?>>Seed</option>
+                         <option value="c" <?php if($Record['unittype']=='c') { echo "selected=''";}?>>Chemical</option>
+                     </select>
+                 </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+            	<div class="frmColLeft" style="width:170px !important;">Unit Name :</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;"> 
+                     <input type="text" value="<?php echo $Record['unit'];?>" name="unit" id="unit"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+            <div class="frmRow" style="float: left; width: 50%;">
+                <div class="frmColLeft" style="width:170px !important;">Unit Display on App : <br />(Like Acreage as ACR)</div>
+                <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                 <div style="width:250px !important;"> 
+                     <input type="text" value="<?php echo $Record['disp'];?>" name="disp" id="disp" placeholder="" maxlength="3" style="text-transform: uppercase;"> 
+                  </div>
+                </div>
+            	</div>
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+            
+             <div class="frmRow" style="float: left; width: 50%;">
+               <div class="frmColLeft">Conversion Value for Land Only:</div>
+                 <div class="frmColRight" style="margin-left: 170px!important;">
+            	<div class="acme_dtdp">
+                <div >
+                    <input type="text" name="acr_val"  value="<?php echo $Record['acr_val'];?>" class="span2" placeholder=" Type here.. "/>
+                </div>
+                </div></div>
+            
+                
+				 <div class="clear"></div>
+            </div>
+            
+            
+            </fieldset>
+           
+            
+            
+            
+           
+          
+              <div class="genrateBtn" style="margin-left:170px !important; margin-top: 25px; padding-bottom:35px; ">
+              <button type="button" class="btn btn-primary" value="Cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary" value="Save">Save Changes</button>
+              </div>
+        </form>
+</div>
+    </div>
+
+
+
